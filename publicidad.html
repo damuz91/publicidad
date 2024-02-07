@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Load Bootstrap cdn-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <script>
+    function procesar_primer_paso(){
+      // Obtener el input de tipo radio seleccionado con name = paso1
+      var modo1 = document.querySelector('input[name="paso1"]:checked').value;
+      console.log("Se hizo click en el paso 1 y se seleccionó: " + modo1);
+      // Mostrar el bloque de id=paso2
+      document.getElementById('paso2').classList.remove('d-none');
+    }
+  </script>
+
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>Publicidad</h1>
+        <form action="">
+          <!-- 2 inputs -->
+          <div id="paso1">
+            <h1>Paso 1.</h1>
+            <div class="form-group">
+              <label for="">
+                <input type="radio" id="paso1_toda" name="paso1" value="toda" onclick="procesar_primer_paso()">
+                Toda la tienda
+              </label>
+              <label for="">
+                <input type="radio" id="paso1_referencia_seleccionada" name="paso1" value="referencias" onclick="procesar_primer_paso()">
+                Referencias seleccionadas
+              </label>
+            </div>
+          </div>
+
+          <div id="paso2" class="d-none">
+            <h1>Paso 2.</h1>
+            <div class="form-group">
+              <label for="">
+                <input type="radio" class="form-control" id="nombre" name="modo2">
+                Desde y Hasta
+              </label>
+              <label for="">
+                <input type="radio" class="form-control" id="nombre" name="modo2">
+                Descuento extra
+              </label>
+              <label for="">
+                <input type="radio" class="form-control" id="nombre" name="modo2">
+                Unico descuento
+              </label>
+            </div>
+          </div>
+
+          <div id="paso2a" class="d-none">
+            <h1>Paso 2.A.</h1>
+            <div class="form-group">
+              <label for="">
+                <textarea class="form-control" name="Referencias" id="" cols="50" rows="5"></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div id="paso3" class="d-none">
+            <h1>Paso 3.</h1>
+            <div class="form-group">
+              <label for="desde">Fecha desde</label>
+              <input id="desde" type="date" class="form-control">
+              <label for="hasta">Fecha hasta</label>
+              <input id="hasta" type="date" class="form-control">
+            </div>
+          </div>
+          
+          <div id="paso4" class="d-none">
+            <h1>Paso 4</h1>
+            <div class="form-group">
+              <label for="lugar"></label>
+              <ul>
+                <li><label for="lugar">Tienda física <input type="checkbox"></label></li>
+                <li><label for="lugar">Whatsapp <input type="checkbox"></label></li>
+                <li><label for="lugar">Online <input type="checkbox"></label></li>
+                <li><label for="lugar">Rappi <input type="checkbox"></label></li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="paso5" class="d-none">
+            <h1>Paso 5</h1>
+            <div class="form-group">
+              <button class="btn btn-success">Generar</button>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Load Bootstrap js cdn-->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
