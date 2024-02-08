@@ -8,12 +8,159 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <script>
+
+    let valor_paso1;
+    let valor_paso2;
+    let valores_paso4;
+
     function procesar_primer_paso(){
-      // Obtener el input de tipo radio seleccionado con name = paso1
-      var modo1 = document.querySelector('input[name="paso1"]:checked').value;
-      console.log("Se hizo click en el paso 1 y se seleccionó: " + modo1);
-      // Mostrar el bloque de id=paso2
+      
+      // Obtener el valor del input de tipo radio seleccionado con name = paso1
+      valor_paso1 = document.querySelector('input[name="paso1"]:checked').value;
+      
+      console.log("Se hizo click en el paso 1 y se seleccionó: " + valor_paso1);
+      
+      // Quitar la clase d-none que oculta el bloque de id paso2
       document.getElementById('paso2').classList.remove('d-none');
+    }
+
+    function procesar_segundo_paso(){
+      // Obtener el valor del input de tipo radio seleccionado con name = modo2
+      valor_paso2 = document.querySelector('input[name="modo2"]:checked').value;
+      
+      console.log("Se hizo click en el paso 2 y se seleccionó: " + valor_paso2);
+
+      // Mostrar el bloque de id paso3
+      document.getElementById('paso3').classList.remove('d-none');
+
+      // SI valor_paso2 es igual a "desde y hasta" entonces mostrar el bloque de caja_rango
+      // SINO mostrar el bloque de caja_descuento
+      if(valor_paso2 == "desde y hasta"){
+        document.getElementById('caja_rango').classList.remove('d-none');
+        document.getElementById('caja_descuento').classList.add('d-none');
+      }else{
+        document.getElementById('caja_rango').classList.add('d-none');
+        document.getElementById('caja_descuento').classList.remove('d-none');
+      }
+
+      // SI valor_paso1 es igual a "referencias" entonces mostrar el cuadrito id = 'caja_referencias_seleccionadas'
+      if(valor_paso1 == "referencias"){
+        document.getElementById('caja_referencias_seleccionadas').classList.remove('d-none');
+      }
+      
+    }
+
+    function generar(){
+
+      // Validaciones
+      // 1. Validar que en el paso 4 se haya seleccionado por lo menos una opción
+
+      // Declarar un vector vacío
+      valores_paso4 = []
+      
+      // Obtener todos los inputs de tipo checkbox que estén seleccionados
+      let checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+      // Recorrer el vector de checkboxes y guardar los valores en el vector valores_paso4
+      for (let i = 0; i < checkboxes.length; i++) {
+        valores_paso4.push(checkboxes[i].value)
+      }
+
+      // Si el vector valores_paso4 está vacío entonces mostrar un alert
+      if(valores_paso4.length == 0){
+        alert("Debes seleccionar por lo menos una opción en el paso 4")
+      }
+
+      // 2. Que la fecha desde no sea menor que a hoy Y que la fecha hasta no sea menor que la fecha desde
+      let fecha_desde = document.getElementById('desde').value
+      let hoy = new Date().toISOString().split('T')[0]
+      if(fecha_desde < hoy){
+        alert("La fecha desde no puede ser menor que hoy")
+        return
+      }
+
+      // 3. Que la fecha hasta no sea menor que la fecha desde
+      let fecha_hasta = document.getElementById('hasta').value
+      if(fecha_hasta < fecha_desde){
+        alert("La fecha hasta no puede ser menor que la fecha desde")
+        return
+      }
+
+      // La validación 4 solo se  hace si el valor_paso2 es igual a "desde y hasta"
+      // La validación 5 solo se hace si el valor_paso2 es igual a "extra" o "unico"
+
+      // 4. Que el porcentaje_hasta no sea menor que porcentaje_desde
+
+      if(valor_paso2 == "desde y hasta"){
+        let porcentaje_desde = document.getElementById('porcentaje_desde').value
+        let porcentaje_hasta = document.getElementById('porcentaje_hasta').value
+        if(porcentaje_hasta < porcentaje_desde){
+          alert("El porcentaje hasta no puede ser menor que el porcentaje desde")
+          return
+        }
+      }
+
+      // 5. Que el descuento no sea mayor que 90 ni menor que 10
+      if(valor_paso2 == "extra" || valor_paso2 == "unico"){
+        let descuento = document.getElementById('descuento').value
+        if(descuento > 90 || descuento < 10){
+          alert("El descuento no puede ser mayor que 90 ni menor que 10")
+          return
+        }
+      }
+
+      // 6. Que si el valor_paso1 es igual a "referencias" entonces el textarea no esté vacío
+      if(valor_paso1 == "referencias"){
+        let referencias = document.querySelector('textarea[name="Referencias"]').value
+        if(referencias == ""){
+          alert("Debes escribir por lo menos una identificación de la referencia seleccionada (Sticker, Código, Colección)")
+          return
+        }
+      }
+
+      concatenar()
+      
+    }
+
+    function concatenar(){
+      texto_final = ""
+
+      // Caso: Toda la tienda
+
+      // Ejemplo: 
+      
+      // 40% OFF EN TODA LA TIENDA AMERICAN EAGLE Y AERIE. Válido el 11 de enero del 2024. Aplica exclusivamente para la tienda online Tienda de ropa y accesorios online | American Eagle  y en WhatsApp AE. No aplica para las tiendas físicas línea AE y Aerie a nivel nacional, Outlets, Rappi ni Corners Falabella. El descuento aplica al momento del pago en el chekout. No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.
+
+      // Caso: Referencias seleccionadas
+
+      // Ejemplo:
+
+      // Variables:
+
+      // Paso 1
+      if(valor_paso1 == "toda"){
+        modo1 = "Toda la tienda"
+      }
+      if(valor_paso1 == "referencias"){
+        modo1 = "Referencias seleccionadas"
+      }
+
+      alert("Aplica en " + modo1 + " con descuento del " + document.getElementById('descuento').value + "% desde " + document.getElementById('desde').value + " hasta " + document.getElementById('hasta').value + " en " + valores_paso4.join(", ") + ".")
+
+      // Paso 2
+      if(valor_paso2 == "desde y hasta"){
+        modo2 += " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%"
+      }
+
+      if(valor_paso2 == "extra"){
+        modo2 += " con descuento extra del " + document.getElementById('descuento').value + "%"
+      }
+
+      // Paso 3
+      fecha_desde = document.getElementById('desde').value
+      fecha_hasta = document.getElementById('hasta').value
+      
+      alert(texto_final)
     }
   </script>
 
@@ -22,7 +169,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1>Publicidad</h1>
+        <h1 style="color: red;">Publicidad</h1>
         <form action="">
           <!-- 2 inputs -->
           <div id="paso1">
@@ -39,60 +186,85 @@
             </div>
           </div>
 
-          <div id="paso2" class="d-none">
+          <div id="paso2" class="d-nonex">
             <h1>Paso 2.</h1>
             <div class="form-group">
               <label for="">
-                <input type="radio" class="form-control" id="nombre" name="modo2">
+                <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="desde y hasta">
                 Desde y Hasta
               </label>
               <label for="">
-                <input type="radio" class="form-control" id="nombre" name="modo2">
+                <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="extra">
                 Descuento extra
               </label>
               <label for="">
-                <input type="radio" class="form-control" id="nombre" name="modo2">
+                <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="unico">
                 Unico descuento
               </label>
             </div>
           </div>
 
-          <div id="paso2a" class="d-none">
-            <h1>Paso 2.A.</h1>
-            <div class="form-group">
-              <label for="">
-                <textarea class="form-control" name="Referencias" id="" cols="50" rows="5"></textarea>
-              </label>
-            </div>
-          </div>
-
-          <div id="paso3" class="d-none">
+          <div id="paso3" class="d-nonex">
             <h1>Paso 3.</h1>
+            
             <div class="form-group">
               <label for="desde">Fecha desde</label>
               <input id="desde" type="date" class="form-control">
               <label for="hasta">Fecha hasta</label>
               <input id="hasta" type="date" class="form-control">
             </div>
+
+            <div class="form-group" id="caja_descuento">
+              <label for="descuento">Descuento</label>
+              <input id="descuento" type="number" class="form-control">
+            </div>
+
+            <div id="caja_rango">
+              <div class="form-group">
+                <label for="porcentaje_desde">
+                  % Desde
+                  <input id="porcentaje_desde" type="number" class="form-control">
+                <label>
+              </div>
+  
+              <div class="form-group">
+                <label for="porcentaje_hasta">
+                  % Hasta
+                  <input id="porcentaje_hasta" type="number" class="form-control">
+                <label>
+              </div>
+            </div>
+
+            <div id="caja_referencias_seleccionadas">
+              <div class="form-group">
+                <label for="">
+                  Referencias Seleccionadas
+                  <textarea class="form-control" name="Referencias" id="" cols="50" rows="5"></textarea>
+                </label>
+              </div>
+            </div> 
+            
           </div>
-          
-          <div id="paso4" class="d-none">
+
+          <div id="paso4">
             <h1>Paso 4</h1>
             <div class="form-group">
               <label for="lugar"></label>
               <ul>
-                <li><label for="lugar">Tienda física <input type="checkbox"></label></li>
-                <li><label for="lugar">Whatsapp <input type="checkbox"></label></li>
-                <li><label for="lugar">Online <input type="checkbox"></label></li>
-                <li><label for="lugar">Rappi <input type="checkbox"></label></li>
+                <li><input value="tienda" type="checkbox"> <label for="lugar">Tienda física</label></li>
+                <li><input value="whatsapp" type="checkbox"> <label for="lugar">Whatsapp</label></li>
+                <li><input value="online" type="checkbox"> <label for="lugar">Online</label></li>
+                <li><input value="rappi" type="checkbox"> <label for="lugar">Rappi</label></li>
+                <li><input value="falabella" type="checkbox"> <label for="lugar">Falabella</label></li>
+                <li><input value="outlets" type="checkbox"> <label for="lugar">Outlets</label></li>
               </ul>
             </div>
           </div>
 
-          <div id="paso5" class="d-none">
+          <div id="paso5">
             <h1>Paso 5</h1>
             <div class="form-group">
-              <button class="btn btn-success">Generar</button>
+              <button type="button" class="btn btn-success" onclick="generar()">Generar</button>
             </div>
           </div>
           
