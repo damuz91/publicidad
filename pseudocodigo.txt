@@ -1,0 +1,29 @@
+INICIO
+
+  VAR opcionFinal1 = obtener('modo')
+
+  SI(opcionFinal1 = "Toda la tienda") ENTONCES
+    opcionFinal1 = "Aplica en toda la tienda"
+    referenciasSeleccionadas = ''
+  SINO
+    opcionFinal1 = "Aplica en referencias seleccionadas"
+    referenciasSeleccionadas = obtener('referencias_seleccionadas')
+  FIN
+
+  VAR opcionFinal2 = obtener('modo2')
+
+  SI(opcionFinal2 = "Desde y hasta") ENTONCES
+    opcionFinal2 = "desde " + obtener('valor_desde') + "% hasta " + obtener('valor_hasta') + "%"
+  SINO SI(opcionFinal2 = "Unico descuento") ENTONCES
+    opcionFinal2 = obtener('descuento') + '% de descuento'
+  SINO
+    opcionFinal2 = obtener('descuento') + '% extra'
+  FIN
+
+  VAR fecha_vigencia = obtener('fecha_vigencia_desde') + " al " + obtener('fecha_vigencia_hasta')
+  VAR lugar = obtener('lugar')
+  VAR texto_final = "No acumulable con otras promociones."
+
+  IMPRIMIR(opcionFinal1 + " " + opcionFinal2 + " " + referenciasSeleccionadas + " " + fecha_vigencia + " " + lugar + " " + texto_final)
+
+FINAL
