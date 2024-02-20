@@ -166,14 +166,15 @@
 
       // Paso 3
       fecha_desde = document.getElementById('desde').value
-        fecha_hasta = document.getElementById('hasta').value
+      fecha_hasta = document.getElementById('hasta').value
+      const opciones = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+      fecha_desde = new Date(fecha_desde).toLocaleDateString('es-es', opciones)
+      fecha_hasta = new Date(fecha_hasta).toLocaleDateString('es-es', opciones)
 
-        // Paso4
-        const Texto_complemento =  "40% OFF EN TODA LA TIENDA AMERICAN EAGLE Y AERIE. Válido el 11 de enero del 2024. Aplica exclusivamente para la tienda online Tienda de ropa y accesorios online | American Eagle  y en WhatsApp AE. No aplica para las tiendas físicas línea AE y Aerie a nivel nacional, Outlets, Rappi ni Corners Falabella. El descuento aplica al momento del pago en el chekout. No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero."
-
-        var joined = modo1 + modo2 + Texto_complemento;
-         
-            var textoFinal = modo1 + modo2 + Texto_complemento;
+      // Paso4
+      const Texto_complemento =  "40% OFF EN TODA LA TIENDA AMERICAN EAGLE Y AERIE. Válido " + fecha_desde + " hasta " + fecha_hasta + ". Aplica exclusivamente para la tienda online Tienda de ropa y accesorios online | American Eagle  y en WhatsApp AE. No aplica para las tiendas físicas línea AE y Aerie a nivel nacional, Outlets, Rappi ni Corners Falabella. El descuento aplica al momento del pago en el chekout. No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero."
+      var joined = modo1 + modo2 + Texto_complemento;
+      var textoFinal = modo1 + modo2 + Texto_complemento;
 
       alert(textoFinal)
     }
