@@ -18,8 +18,7 @@
       // Obtener el valor del input de tipo radio seleccionado con name = paso1
       valor_paso1 = document.querySelector('input[name="paso1"]:checked').value;
       
-      // console.log("Se hizo click en el paso 1 y se seleccionó: " + valor_paso1);
-      alert("Se hizo click en el paso 1 y se seleccionó: " + valor_paso1)
+      console.log("Se hizo click en el paso 1 y se seleccionó: " + valor_paso1);
       
       // Quitar la clase d-none que oculta el bloque de id paso2
       document.getElementById('paso2').classList.remove('d-none');
@@ -74,7 +73,11 @@
 
       // 2. Que la fecha desde no sea menor que a hoy Y que la fecha hasta no sea menor que la fecha desde
       let fecha_desde = document.getElementById('desde').value
-      let hoy = new Date().toISOString().split('T')[0]
+        let hoy = new Date().toISOString().split('T')[0]
+        const fechaActual = new Date();
+        const opciones = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+       console.log(fechaActual.toLocaleDateString('en-us', opciones));
+        //Friday, Jul 2, 2021
       if(fecha_desde < hoy){
         alert("La fecha desde no puede ser menor que hoy")
         return
@@ -150,18 +153,29 @@
 
       // Paso 2
       if(valor_paso2 == "desde y hasta"){
-        modo2 += " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%"
+        modo2 = " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%"
       }
 
       if(valor_paso2 == "extra"){
-        modo2 += " con descuento extra del " + document.getElementById('descuento').value + "%"
+        modo2 = " con descuento extra del " + document.getElementById('descuento').value + "%"
+      }
+
+      if(valor_paso2 == 'unico'){
+        modo2 = ""
       }
 
       // Paso 3
       fecha_desde = document.getElementById('desde').value
-      fecha_hasta = document.getElementById('hasta').value
-      
-      alert(texto_final)
+        fecha_hasta = document.getElementById('hasta').value
+
+        // Paso4
+        const Texto_complemento =  "40% OFF EN TODA LA TIENDA AMERICAN EAGLE Y AERIE. Válido el 11 de enero del 2024. Aplica exclusivamente para la tienda online Tienda de ropa y accesorios online | American Eagle  y en WhatsApp AE. No aplica para las tiendas físicas línea AE y Aerie a nivel nacional, Outlets, Rappi ni Corners Falabella. El descuento aplica al momento del pago en el chekout. No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero."
+
+        var joined = modo1 + modo2 + Texto_complemento;
+         
+            var textoFinal = modo1 + modo2 + Texto_complemento;
+
+      alert(textoFinal)
     }
   </script>
 
@@ -187,7 +201,7 @@
             </div>
           </div>
 
-          <div id="paso2" class="d-none"  >
+          <div id="paso2" class="d-nonex">
             <h1>Paso 2.</h1>
             <div class="form-group">
               <label for="">
@@ -205,7 +219,7 @@
             </div>
           </div>
 
-          <div id="paso3" class="d-none">
+          <div id="paso3" class="d-nonex">
             <h1>Paso 3.</h1>
             
             <div class="form-group">
@@ -247,7 +261,7 @@
             
           </div>
 
-          <div id="paso4" class="d-none">
+          <div id="paso4">
             <h1>Paso 4</h1>
             <div class="form-group">
               <label for="lugar"></label>
@@ -262,7 +276,7 @@
             </div>
           </div>
 
-          <div id="paso5" class="d-none">
+          <div id="paso5">
             <h1>Paso 5</h1>
             <div class="form-group">
               <button type="button" class="btn btn-success" onclick="generar()">Generar</button>
