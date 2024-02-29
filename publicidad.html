@@ -177,6 +177,20 @@
       var textoFinal = modo1 + modo2 + Texto_complemento;
 
       alert(textoFinal)
+
+      fetch('http://localhost:3000/crear_legal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({texto_creado: textoFinal})
+      }).then(function(response){
+        return response.json()
+      }).then(function(data){
+        console.log("El servidor me devolvió una respuesta exitosa con los datos,", data)
+      }).catch(function(error){
+        console.log("Hubo un error", error)
+      })
     }
   </script>
 
