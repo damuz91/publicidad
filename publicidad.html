@@ -12,6 +12,7 @@
     let valor_paso1;
     let valor_paso2;
     let valores_paso4;
+    let marca;
 
     function procesar_primer_paso(){
       
@@ -64,6 +65,13 @@
     }
 
     function generar(){
+
+      //capturar la marca
+      e = document.getElementById("marca")
+      value = e.value;
+      marca = e.options[e.selectedIndex].text;
+
+      alert(marca)
 
       // Validaciones
       // 1. Validar que en el paso 4 se haya seleccionado por lo menos una opción
@@ -209,6 +217,17 @@
         <form action="">
           <!-- 2 inputs -->
           <br>
+          <hr>
+          <h2>Seleccionar la marca</h2>
+          <br>
+          <label for="marcas">Elige la marca:</label>
+          <select id="marca">
+          <option value="Naf">Naf Naf</option>
+          <option value="Che">Rifle</option>
+          <option value="Es">Chevignon</option>
+          <option value="Rifle">Rifle</option>
+          </select>
+          
           <div id="paso1">
             <h1>Paso 1.</h1>
             <div class="form-group">
