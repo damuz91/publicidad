@@ -23,11 +23,11 @@
       
       if(valor_paso1 == "toda"){
         modo1 = "Toda la tienda"
-        window.alert ("Esto quiere decir que TODOS tus productos estarán con descuento")
+        //window.alert ("Esto quiere decir que TODOS tus productos estarán con descuento")
       }
       if(valor_paso1 == "referencias"){
         modo1 = "Referencias seleccionadas"
-        window.alert("Esto quiere decir que CIERTOS tus productos estarán con descuento")
+        //window.alert("Esto quiere decir que CIERTOS tus productos estarán con descuento")
       }
                
      
@@ -65,12 +65,41 @@
     
     function comoaplicadcto() {
       var Texto_comoaplica =" "
-      if (document.querySelector('input[value="Tienda"]:checked') != null)
-        Texto_comoaplica = "El descuento en tienda física aplica al momento del pago en caja"
+      const canales_seleccionados = document.querySelectorAll('input[name="canal"]:checked')
+      const array = Array.from(canales_seleccionados);
+      const canales = array.map((input) => input.value)
+      const frase1 = "El descuento en tienda física aplica al momento del pago en caja."
+      const frase2 = "El descuento en tienda online se encuentra aplicado en el precio del producto."
+      const frase3 = "El descuento en tienda física aplica al momento del pago en caja y en tienda online y Wh se encuentra aplicado en el precio del producto. "
+       
+      //El descuento en xxxxxx aplica al momento del pago. El descuento en xxxxx se encuentra aplicado en el precio del producto. "
+       
+      if ($.inArray('tienda',canales) || $.inArray('whatsapp',canales) || $.inArray('falabella',canales) || $.inArray('outlets',canales) ){
+        elementosAExcluir = ['online','rappi']
+        const canalesFisicos = canales.filter(elemento => !elementosAExcluir.includes(elemento));
+        Texto_comoaplica = "El descuento en " +  canalesFisicos + " aplica al momento del pago."
+      }
+      
+      if ($.inArray('rappi',canales) || $.inArray('online',canales)){
+        elementosAExcluir = ["tienda","whatsapp","falabella","outlets"]
+        const canalesDigitales= canales.filter(elemento=>!elementosAExcluir.includes(elemento))
+      Texto_comoaplica += "El descuento en " + canalesDigitales + " se encuentra aplicado en el precio del producto."
+      }
 
-      if (document.querySelector('input[value="Online"]:checked') != null)
-        Texto_comoaplica = "El descuento en tienda online se encuentra aplicado en el precio del producto"
 
+
+    
+
+      //if (document.querySelector('input[value="tienda"]:checked') != null){
+        //Texto_comoaplica = "El descuento en tienda física aplica al momento del pago en caja"
+      //}
+        
+
+      //if (document.querySelector('input[value="online"]:checked') != null){
+        //Texto_comoaplica = "El descuento en tienda online se encuentra aplicado en el precio del producto"
+      //}
+        
+      
       return Texto_comoaplica
     }
 
@@ -332,12 +361,12 @@
             <div class="form-group">
               <label for="lugar"></label>
               <ul>
-                <li><input value="tienda" type="checkbox"> <label for="lugar">Tienda física</label></li>
-                <li><input value="whatsapp" type="checkbox"> <label for="lugar">Whatsapp</label></li>
-                <li><input value="online" type="checkbox"> <label for="lugar">Online</label></li>
-                <li><input value="rappi" type="checkbox"> <label for="lugar">Rappi</label></li>
-                <li><input value="falabella" type="checkbox"> <label for="lugar">Falabella</label></li>
-                <li><input value="outlets" type="checkbox"> <label for="lugar">Outlets</label></li>
+                <li><input name="canal" value="tienda" type="checkbox"> <label for="lugar">Tienda física</label></li>
+                <li><input name="canal" value="whatsapp" type="checkbox"> <label for="lugar">Whatsapp</label></li>
+                <li><input name="canal" value="online" type="checkbox"> <label for="lugar">Online</label></li>
+                <li><input name="canal" value="rappi" type="checkbox"> <label for="lugar">Rappi</label></li>
+                <li><input name="canal" value="falabella" type="checkbox"> <label for="lugar">Falabella</label></li>
+                <li><input name="canal" value="outlets" type="checkbox"> <label for="lugar">Outlets</label></li>
               </ul>
             </div>
           </div>
