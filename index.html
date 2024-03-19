@@ -72,14 +72,14 @@
       
       //El descuento en xxxxxx aplica al momento del pago. El descuento en xxxxx se encuentra aplicado en el precio del producto. "
        
-      if ($.inArray('Tienda física ',canales) || $.inArray('Whatsapp ',canales) || $.inArray('Falabella ',canales) || $.inArray('Outlets ',canales) ){
-        elementosAExcluir = ['Online','Rappi']
+      if ($.inArray('Tienda física',canales) || $.inArray(' Whatsapp',canales) || $.inArray(' Falabella',canales) || $.inArray(' Outlets',canales) ){
+        elementosAExcluir = [' Online',' Rappi'] 
         const canalesFisicos = canales.filter(elemento => !elementosAExcluir.includes(elemento));
         Texto_comoaplica = "El descuento en " +  canalesFisicos + " aplica al momento del pago."
       }
       
-      if ($.inArray('Rappi ',canales) || $.inArray('Online ',canales)){
-        elementosAExcluir = ["Tienda física","Whatsapp","Falabella","Outlets"]
+      if ($.inArray(' Rappi',canales) || $.inArray(' Online',canales)){
+        elementosAExcluir = ["Tienda física"," Whatsapp"," Falabella"," Outlets"]
         const canalesDigitales= canales.filter(elemento=>!elementosAExcluir.includes(elemento))
       Texto_comoaplica += " El descuento en " + canalesDigitales + " se encuentra aplicado en el precio del producto."
       }
@@ -315,27 +315,27 @@
             
             <div id="fechas" class="form-group">
               <label for="desde">Fecha desde</label>
-              <input id="desde" type="date" class="form-control">
+              <input style="width: 200px; height: 40px;" id="desde" type="date" class="form-control">
               <label for="hasta">Fecha hasta</label>
-              <input id="hasta" type="date" class="form-control">
+              <input style="width: 200px; height: 40px;" id="hasta" type="date" class="form-control">
             </div>
             <br>
             <div class="form-group" id="caja_descuento">
               <label for="descuento">Descuento</label>
-              <input placeholder="Escribe aquí el # de descuento (sin %)" id="descuento" type="number" class="form-control">
+              <input style="width: 200px; height: 40px;" placeholder="Solo el # (sin %)" id="descuento" type="number" class="form-control">
             </div>
-
+ 
             <div id="caja_rango">
               <div class="form-group">
-                <label for="porcentaje_desde">
+                <label style="font-size: smaller;" for="porcentaje_desde">
                   % Desde
-                  <input id="porcentaje_desde" type="number" class="form-control">
+                  <input style="width: 200px; height: 40px;" id="porcentaje_desde" type="number" class="form-control">
                 <label>
               </div>
                 <div class="form-group">
-                <label for="porcentaje_hasta">
+                <label style="font-size: smaller;" for="porcentaje_hasta">
                   % Hasta
-                  <input id="porcentaje_hasta" type="number" class="form-control">
+                  <input style="width: 200px; height: 40px;" id="porcentaje_hasta" type="number" class="form-control">
                 <label>
               </div>
             </div>
@@ -358,21 +358,13 @@
             <div class="form-group">
               <label for="lugar"></label>
               <ul>
-<<<<<<< HEAD:publicidad.html
-                <li><input name="canal" value="tienda" type="checkbox"> <label for="lugar">Tienda física</label></li>
-                <li><input name="canal" value="whatsapp" type="checkbox"> <label for="lugar">Whatsapp</label></li>
-                <li><input name="canal" value="online" type="checkbox"> <label for="lugar">Online</label></li>
-                <li><input name="canal" value="rappi" type="checkbox"> <label for="lugar">Rappi</label></li>
-                <li><input name="canal" value="falabella" type="checkbox"> <label for="lugar">Falabella</label></li>
-                <li><input name="canal" value="outlets" type="checkbox"> <label for="lugar">Outlets</label></li>
-=======
                 <li><input name="canal" value="Tienda física" type="checkbox"> <label for="lugar">Tienda física</label></li>
                 <li><input name="canal" value=" Whatsapp" type="checkbox"> <label for="lugar">Whatsapp</label></li>
                 <li><input name="canal" value=" Online" type="checkbox"> <label for="lugar">Online</label></li>
                 <li><input name="canal" value=" Rappi" type="checkbox"> <label for="lugar">Rappi</label></li>
                 <li><input name="canal" value=" Falabella" type="checkbox"> <label for="lugar">Falabella</label></li>
                 <li><input name="canal" value=" Outlets" type="checkbox"> <label for="lugar">Outlets</label></li>
->>>>>>> d6a9214490cf8a01cae1d7f95ecad8a63599d453:index.html
+
               </ul>
             </div>
           </div>
