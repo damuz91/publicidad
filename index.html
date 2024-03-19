@@ -225,16 +225,20 @@
       // Paso5
       const Texto_complemento =  " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero."
               
-        var textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+      var textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
 
       alert(textoFinal)
-
-      fetch('http://localhost:3000/crear_legal', {
+      cuerpo_solicitud = {
+        texto_creado: textoFinal, 
+        marca: marca
+      }
+      
+        fetch('http://localhost:3000/crear_legal', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({texto_creado: textoFinal})
+        body: JSON.stringify(cuerpo_solicitud)
       }).then(function(response){
         return response.json()
       }).then(function(data){
