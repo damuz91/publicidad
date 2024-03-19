@@ -6,8 +6,18 @@ exports.create_legal = async (req, res) => {
   try {
     const { params } = req.params;
     contenido = req.body.texto_creado;
+    marca = req.body.marca;
     
-    nombre_archivo = 'legal.txt';
+    // Obtener el epoch en milisegundos
+    date = new Date();
+    fecha_hora = date.getTime().toString();
+    // Crear el nombre del archivo con el epoch
+    nombre_archivo = "legales/" + fecha_hora + ".txt";
+    contenido_archivo = {
+      "fecha_hora": date.toLocaleString(),
+      "legal": contenido,
+      "marca": marca
+    }
     // Write to the file
     fs.writeFile(nombre_archivo, contenido, (err) => {
       if (err) {
