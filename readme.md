@@ -1,9 +1,9 @@
-# Proyecto de legal.
+# Proyecto Legales.
 
 # Descripción
 Este proyecto debe crear un texto asociado a los legales basado en los parámetros que se encuentran en el formulario.
 
-# Requisitos 'funcionales'
+# Requisitos 'funcionales'
 1. Que las marcas diferentes puedan tener acceso
 2. Preguntar el nombre de la marca
 3. Agregar el nombre de la marca al legal generado
