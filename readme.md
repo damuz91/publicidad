@@ -21,6 +21,11 @@ Este proyecto debe crear un texto asociado a los legales basado en los parámetr
 5. Que tenga la capcidad de generar tantos legales como sean necesarios
 6. Que el diseño del formulario se adapte a la pantalla en donde sea consultado
 
+# Stack de tecnologías
+- Frontend: HTML, JS, CSS.
+- Backend: Nodejs 18, Express
+- Almacenamiento: Archivos planos
+
 # Arquitectura
 Esta es una aplicación cliente-servidor. Por el lado del cliente se encuentra el archivo index.html que es el que contiene el código del formulario y la lógica que permite enviar al servidor remoto los datos ingresados.
 
@@ -49,9 +54,17 @@ Hay que asegurarse que el puerto en el que inicia el backend es el mismo que est
 
 # Despliegue
 - Solicitar una ruta y puerto disponible al servidor en donde se hace la instalación
-- Solicitar permisos de lectura y escritura sobre el sistema de archivos, sea por FTP o SSH. Documentar como es ese proceso aqui.
-- Utilizar cualquier servidor web disponible para esto, sea apache, nginx o pm2.
-- Colocar en el archivo de ambiente la información necesaria del backend y asegurarse que el frontend tenga en despliegue la ruta necesaria para que funcione en modo producción.
+- Solicitar permisos de lectura y escritura sobre el sistema de archivos en la ruta del proyecto solamente, sea por FTP o SSH. Tarea futura: Documentar cómo es ese proceso aqui.
+- Utilizar cualquier servidor web disponible para esto, sea apache, nginx o pm2. Configurar 2 aplicaciones, una que sirva al archivo index.html y otra que sirva a la ruta: /app/*
+- Existe el archivo de ambiente .env, pero no tiene configuración. En un futuro se debe colocar aqui los datos necesarios según el ambiente y se debe restringir el acceso apropiadamente.
+
+# Almacenamiento
+
+Este MVP guarda los legales en archivos de texto que contienen JSON con la información necesaria. Una versión futura puede tener una base de datos donde, además, se guarden los usuarios que pueden ingresar.
+
+# Login
+
+Este MVP permite el acceso solo con autenticación HTTP (Notar que esta autenticación es vulnerable a ataques de fuerza bruta). Iteraciones posteriores de este proyecto pueden incluir sistemas de autenticación robustos.
 
 # Pruebas
 - Tarea futura: Crear guión con posibles entradas que serviran para probar que el sistema funcione correctamente.
