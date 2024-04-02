@@ -13,6 +13,7 @@
     let valor_paso2;
     let valores_paso4;
     let marca;
+    let nombre_usuario;
 
     function procesar_primer_paso(){
       
@@ -107,7 +108,16 @@
       value = e.value;
       marca = e.options[e.selectedIndex].text;
 
-             // Validaciones
+      // Validaciones
+
+      // 0. Validar que el usuario haya ingresado su nombre
+      nombre_usuario = document.querySelector('input[name="nombre_usuario"]').value
+      // Remover los espacios en blanco al inicio y al final
+      nombre_usuario = nombre_usuario.trim()
+      if(nombre_usuario == ""){
+        alert("Debes ingresar tu nombre")
+        return
+      }
       // 1. Validar que en el paso 4 se haya seleccionado por lo menos una opción
 
       // Declarar un vector vacío
@@ -230,10 +240,11 @@
       alert(textoFinal)
       cuerpo_solicitud = {
         texto_creado: textoFinal, 
-        marca: marca
+        marca: marca,
+        nombre_usuario: nombre_usuario
       }
       
-        fetch('http://localhost:3000/crear_legal', {
+      fetch('http://localhost:3000/crear_legal', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -261,7 +272,7 @@
           <hr>
           <h2>Selecciona tu marca</h2>
           <label for="marcas">Elige la marca:</label>
-          <select id="marca">
+          <select id="marca" class="form-control" style="width: 200px; height: 40px;">
               <option value="Ae">AE</option>
               <option value="AB">American Brands</option>
               <option value="Amcno">Americanino</option>
@@ -278,7 +289,10 @@
               <option value="Rf">Rifle</option>
 
           </select>
-          <br><br>
+          <br>
+          <hr>
+          <label for="nombre_usuario">Ingresa tu nombre:</label>
+          <input type="text" name="nombre_usuario" placeholder="Carla Perez" class="form-control" style="width: 200px; height: 40px;" required>
           <!-- ajustar el orden alfabético manualmente-->
 
           <hr>
