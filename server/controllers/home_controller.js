@@ -2,13 +2,15 @@
 // const homeService = require('../services/home_service');
 const fs = require('fs');
 
+// Esta función recibe los datos desde el Frontend
+// Debe recibir los datos desde el Frontend y guardarlos en un archivo de texto
 exports.create_legal = async (req, res) => {
   try {
     const { params } = req.params;
     // Declaro en variales los parámetros que vienen desde el frontend
     texto_creado = req.body.texto_creado;
     marca = req.body.marca;
-    // usuario = req.body.usuario
+    nombre_usuario = req.body.nombre_usuario;
     
     // Declarar una variable fecha para obtener la cantidad de segundos
     date = new Date();
@@ -16,13 +18,13 @@ exports.create_legal = async (req, res) => {
     
     // Crear el nombre del archivo con los segundos para que sea único. Por ej: legales_123123123123.txt
     nombre_archivo = "legales_" + segundos + ".txt";
-    
+
     // Crear un diccionario con el contenido del archivo
     contenido_archivo = {
       "fecha_hora": date.toLocaleString(),
       "legal": texto_creado,
       "marca": marca,
-      // "usuario": usuario
+      "nombre_usuario": nombre_usuario
     }
     carpeta = 'legales/'
 
@@ -47,10 +49,12 @@ exports.create_legal = async (req, res) => {
 };
 
 
+// Esta función presenta una interfaz para que el usuario pueda ver los legales que se han creado
+// Debe leer los archivos de texto y presentarlos en una vista
 exports.admin_legal = async (req, res) => {
   try {
     const { params } = req.params;
-    // Leo los archivos de la carpeta legales
+    // Leo los archivos de la carpeta 'legales'
     const archivos = fs.readdirSync('legales/');
     // Creo un array vacio de legales
     const legales = [];
