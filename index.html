@@ -14,6 +14,7 @@
     let valores_paso4;
     let marca;
     let nombre_usuario;
+    let tipoEvento = "";
 
     function procesar_primer_paso(){
       
@@ -108,6 +109,7 @@
       value = e.value;
       marca = e.options[e.selectedIndex].text;
 
+
       // Validaciones
 
       // 0. Validar que el usuario haya ingresado su nombre
@@ -118,6 +120,11 @@
         alert("Debes ingresar tu nombre")
         return
       }
+      tipoEvento = document.getElementById("tipoEvento").value
+      if (tipoEvento === "Evento") {
+                tipoEvento = document.getElementById("nombreEvento").value;
+            }
+             // Validaciones
       // 1. Validar que en el paso 4 se haya seleccionado por lo menos una opción
 
       // Declarar un vector vacío
@@ -186,7 +193,13 @@
           return
         }
       }
-
+      tipoEvento = document.getElementById("tipoEvento").value;
+       // Si es un evento, capturar el nombre del evento
+       if (tipoEvento === "Evento") {
+                const nombreEvento = document.getElementById("nombreEvento").value;
+                // Asignar el nombre del evento a la variable tipoEvento
+                tipoEvento = nombreEvento;
+            }
       concatenar()
       
     }
@@ -236,8 +249,10 @@
       const Texto_complemento =  " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero."
               
       var textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
-
-      alert(textoFinal)
+      if (tipoEvento !== "" && tipoEvento !== "No") {
+          textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+        }
+          alert(textoFinal)
       cuerpo_solicitud = {
         texto_creado: textoFinal, 
         marca: marca,
@@ -258,6 +273,16 @@
         console.log("Hubo un error", error)
       })
     }
+    // Función para mostrar u ocultar el campo de texto del nombre del evento según la selección del usuario
+    function mostrarCampoEvento() {
+            const tipoEvento = document.getElementById("tipoEvento").value;
+            const campoEvento = document.getElementById("campoEvento");
+            if (tipoEvento === "Evento") {
+                campoEvento.style.display = "block";
+            } else {
+                campoEvento.style.display = "none";
+            }
+        }
   </script>
 
 </head>
@@ -294,7 +319,16 @@
           <label for="nombre_usuario">Ingresa tu nombre:</label>
           <input type="text" name="nombre_usuario" placeholder="Carla Perez" class="form-control" style="width: 200px; height: 40px;" required>
           <!-- ajustar el orden alfabético manualmente-->
-
+          <h2>¿Es un evento?</h2>
+          <select id="tipoEvento" onchange="mostrarCampoEvento()">
+              <option value="No">No</option>
+              <option value="Evento">Sí, es un evento</option>
+          </select>
+          <br><br>
+          <div id="campoEvento" style="display: none;">
+              <label for="nombreEvento">Nombre del evento:</label>
+              <input type="text" id="nombreEvento">
+          </div>
           <hr>
           <div id="paso1">
             <h2>Elige el modo de tu promoción</h2>
