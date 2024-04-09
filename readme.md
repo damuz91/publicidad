@@ -36,7 +36,7 @@ De lado del servidor es una aplicación de nodejs - express. Esta aplicación ti
 Entrar a la ruta provista (en desarrollo o producción) seguir los pasos indicados en el formulario que se despliega. Una vez diligenciado correctamente el formulario el usuario visualizará el legal generado y lo podrá copiar y pegar.
 
 ## Para el administrador
-Entrar a la ruta /admin-legal e ingresar el usuario y contraseña. 
+Entrar a la ruta /admin_legal e ingresar el usuario y contraseña. 
 
 Si el usuario y contraseña se llegaran a perder, entonces solicitar al desarrollador que cambie el usuario y contraseña directamente en el código (Una futura mejora sería agregar un repositorio de usuarios administrable).
 

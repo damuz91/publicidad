@@ -15,6 +15,7 @@
     let marca;
     let nombre_usuario;
     let tipoEvento = "";
+    let nombreEvento;
 
     function procesar_primer_paso(){
       
@@ -256,7 +257,8 @@
       cuerpo_solicitud = {
         texto_creado: textoFinal, 
         marca: marca,
-        nombre_usuario: nombre_usuario
+        nombre_usuario: nombre_usuario,
+        evento: tipoEvento,
       }
       
       fetch('http://localhost:3000/crear_legal', {

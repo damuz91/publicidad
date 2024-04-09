@@ -11,6 +11,7 @@ exports.create_legal = async (req, res) => {
     texto_creado = req.body.texto_creado;
     marca = req.body.marca;
     nombre_usuario = req.body.nombre_usuario;
+    tipoEvento = req.body.evento;
     
     // Declarar una variable fecha para obtener la cantidad de segundos
     date = new Date();
@@ -24,7 +25,8 @@ exports.create_legal = async (req, res) => {
       "fecha_hora": date.toLocaleString(),
       "legal": texto_creado,
       "marca": marca,
-      "nombre_usuario": nombre_usuario
+      "nombre_usuario": nombre_usuario,
+      "evento": tipoEvento,
     }
     carpeta = 'legales/'
 
