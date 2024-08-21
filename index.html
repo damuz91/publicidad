@@ -81,7 +81,7 @@
         Texto_comoaplica = "El descuento en " +  canalesFisicos + " aplica al momento del pago."
       }
       
-      if ($.inArray(' Rappi',canales) || $.inArray(' Online',canales)){
+      if ($.inArray(' Rappi',canales) || $.inArray('Online',canales)){
         elementosAExcluir = ["Tienda física"," Whatsapp"," Falabella"," Outlets"]
         const canalesDigitales= canales.filter(elemento=>!elementosAExcluir.includes(elemento))
       Texto_comoaplica += " El descuento en " + canalesDigitales + " se encuentra aplicado en el precio del producto."
@@ -440,3 +440,4 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+<!--Esto es una prueba-->
