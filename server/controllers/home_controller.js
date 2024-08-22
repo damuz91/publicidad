@@ -1,6 +1,7 @@
 // Import any required services or models here
 // const homeService = require('../services/home_service');
 const fs = require('fs');
+const { request } = require('http');
 
 // Esta función recibe los datos desde el Frontend
 // Debe recibir los datos desde el Frontend y guardarlos en un archivo de texto
@@ -73,3 +74,46 @@ exports.admin_legal = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+const config = require('../config/abogados.js');
+exports.vista_abogado = async (req, res) => {
+  try {
+    const { abogado} = req.params; 
+
+    // Definir las marcas que cada abogado puede ver
+    const marcasPorAbogado = {
+      'abogado1': ["Naf", "Vt"],
+      'abogado2': ['AE', "Gs"],
+      'abogado3': ['BS', 'Che', 'MNG'],
+      "abogado4": ["Es", "Kl","Cr"],
+      "abogado5": ["Rf", "AB"],
+      "abogado6": ["Su", "Ou", "Amcno"]
+    };
+
+    const marcasExistentes = marcasPorAbogado[abogado] || []; // Marcas que el abogado puede ver
+    const archivos = fs.readdirSync('legales/');
+    const legales = [];
+
+    archivos.forEach(archivo => {
+      const contenido = fs.readFileSync('legales/' + archivo, 'utf-8');
+      const legal = JSON.parse(contenido);
+
+      // Filtrar los legales según las marcas permitidas para el abogado
+      if (marcasExistentes.includes(legal.marca)) { 
+        legales.push(legal);
+      }
+    });
+
+    res.render('vista_abogado', { legales: legales, abogado: abogado });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+    // Declarar una variable fecha para obtener la cantidad de segundos
+    date = new Date();
+    segundos = date.getTime().toString();
+    
+    // Crear el nombre del archivo con los segundos para que sea único. Por ej: legales_123123123123.txt
+    nombre_archivo = "marca" + segundos + ".txt";
+    const marca = req.body.marca;
+
