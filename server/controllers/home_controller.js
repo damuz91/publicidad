@@ -1,92 +1,86 @@
-// Import any required services or models here
-// const homeService = require('../services/home_service');
 const fs = require('fs');
-const { request } = require('http');
 
-// Esta función recibe los datos desde el Frontend
-// Debe recibir los datos desde el Frontend y guardarlos en un archivo de texto
+// Esta función recibe los datos desde el Frontend y los guarda en un archivo de texto
 exports.create_legal = async (req, res) => {
   try {
-    const { params } = req.params;
-    // Declaro en variales los parámetros que vienen desde el frontend
-    texto_creado = req.body.texto_creado;
-    marca = req.body.marca;
-    nombre_usuario = req.body.nombre_usuario;
-    tipoEvento = req.body.evento;
+    // Declaro en variables los parámetros que vienen desde el frontend
+    const texto_creado = req.body.texto_creado;
+    const marca = req.body.marca;
+    const nombre_usuario = req.body.nombre_usuario;
+    const tipoEvento = req.body.evento;
     
     // Declarar una variable fecha para obtener la cantidad de segundos
-    date = new Date();
-    segundos = date.getTime().toString();
+    const date = new Date();
+    const segundos = date.getTime().toString();
     
     // Crear el nombre del archivo con los segundos para que sea único. Por ej: legales_123123123123.txt
-    nombre_archivo = "legales_" + segundos + ".txt";
+    const nombre_archivo = "legales_" + segundos + ".txt";
+    const carpeta = 'legales/';
 
     // Crear un diccionario con el contenido del archivo
-    contenido_archivo = {
+    const contenido_archivo = {
       "fecha_hora": date.toLocaleString(),
       "legal": texto_creado,
       "marca": marca,
       "nombre_usuario": nombre_usuario,
       "evento": tipoEvento,
+    };
+
+    // Crear la carpeta si no existe
+    if (!fs.existsSync(carpeta)) {
+      fs.mkdirSync(carpeta);
     }
-    carpeta = 'legales/'
 
     // Crear el archivo de texto
-    // El primer parámetro es donde se guarda, es decir la carpeta + el nombre del archivo
-    // El segundo parámetro es el contenido del archivo, representado en String
-    // El tercer parámetro es una función que se ejecuta cuando se termina de crear el archivo
     fs.writeFile(carpeta + nombre_archivo, JSON.stringify(contenido_archivo), (error) => {
-      // Si hay un error, imprimalo en la consola del servidor
       if (error) {
         console.error('Ocurrió un error al guardar el archivo:', error);
+        res.status(500).json({ error: 'Error al guardar el archivo' });
       } else {
         console.log('Se creó el archivo exitosamente!');
+        res.json({ success: true, message: 'Legal creado' });
       }
     });
-
-    // Renderizo un JSON con un mensaje de éxito, que se mostrará en el frontend
-    res.json({success: true, mensage: 'Legal creado'});
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
-
 // Esta función presenta una interfaz para que el usuario pueda ver los legales que se han creado
-// Debe leer los archivos de texto y presentarlos en una vista
 exports.admin_legal = async (req, res) => {
   try {
-    const { params } = req.params;
     // Leo los archivos de la carpeta 'legales'
     const archivos = fs.readdirSync('legales/');
-    // Creo un array vacio de legales
     const legales = [];
+
     // Recorro los archivos y lleno el array de legales con el contenido de los archivos
     archivos.forEach(archivo => {
-      // Leo el archivo
       const contenido = fs.readFileSync('legales/' + archivo, 'utf-8');
-      // Parseo el contenido del archivo y lo agrego al array de legales
       legales.push(JSON.parse(contenido));
     });
+
+    console.log(legales)
+
     // Renderizo la vista admin y le paso el array de legales
     res.render('admin', { legales: legales });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-const config = require('../config/abogados.js');
+
+// Esta función presenta una vista para que un abogado pueda ver solo los legales correspondientes a sus marcas
 exports.vista_abogado = async (req, res) => {
   try {
-    const { abogado} = req.params; 
+    const { abogado } = req.params;
 
     // Definir las marcas que cada abogado puede ver
     const marcasPorAbogado = {
-      'abogado1': ["Naf", "Vt"],
-      'abogado2': ['AE', "Gs"],
-      'abogado3': ['BS', 'Che', 'MNG'],
-      "abogado4": ["Es", "Kl","Cr"],
-      "abogado5": ["Rf", "AB"],
-      "abogado6": ["Su", "Ou", "Amcno"]
+      'Maria': ["Naf", "Vt"],
+      'Jota': ['AE', "Gs"],
+      'Valen': ['BS', 'Che', 'MNG'],
+      "Pao": ["Es", "Kl", "Cr"],
+      "Cami": ["Rf", "AB"],
+      "Cata": ["Su", "Ou", "Amcno"]
     };
 
     const marcasExistentes = marcasPorAbogado[abogado] || []; // Marcas que el abogado puede ver
@@ -98,7 +92,7 @@ exports.vista_abogado = async (req, res) => {
       const legal = JSON.parse(contenido);
 
       // Filtrar los legales según las marcas permitidas para el abogado
-      if (marcasExistentes.includes(legal.marca)) { 
+      if (marcasExistentes.includes(legal.marca)) {
         legales.push(legal);
       }
     });
@@ -108,12 +102,3 @@ exports.vista_abogado = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
-    // Declarar una variable fecha para obtener la cantidad de segundos
-    date = new Date();
-    segundos = date.getTime().toString();
-    
-    // Crear el nombre del archivo con los segundos para que sea único. Por ej: legales_123123123123.txt
-    nombre_archivo = "marca" + segundos + ".txt";
-    const marca = req.body.marca;
-

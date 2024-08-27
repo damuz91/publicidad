@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vista para <%= abogado %></title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+  <h1>Hola <%= abogado %></h1>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Legales Asignados</h1>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table" id="legales">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Marca</th>
+            <th>Evento</th>
+            <th>Usuario</th>
+            <th>Legal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% legales.forEach(legal => { %>
+            <tr>
+              <td><%= legal.fecha_hora %></td>
+              <td><%= legal.marca %></td>
+              <td><%= legal.evento %></td>
+              <td><%= legal.nombre_usuario %></td>
+              <td><%= legal.legal %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#legales').DataTable();
+    });
+  </script>
+</body>
+</html>

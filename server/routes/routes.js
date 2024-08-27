@@ -7,13 +7,14 @@ const basicAuth = require('express-basic-auth');
 
 const auth = basicAuth({
   users: { 
-    'abogado1': 'password1', 
-    'abogado2': 'password2', 
-    'abogado3': 'password3',
-    'abogado4': 'password4',
-    'abogado5': 'password5',
-    'abogado6': 'password6', 
-    'admin': 'adminpassword' // Usuario para el administrador
+    'admin': 'adminpassword', // Usuario para el administrador
+    'Maria': 'password1', 
+    'Jota': 'password2', 
+    'Valen': 'password3',
+    'Pao': 'password4',
+    'Cami': 'password5',
+    'Cata': 'password6', 
+    
   }, // Aquí puedes cambiar username y password por las credenciales que desees
   
   unauthorizedResponse: 'Unauthorized',
