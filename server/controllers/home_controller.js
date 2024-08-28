@@ -75,13 +75,18 @@ exports.vista_abogado = async (req, res) => {
 
     // Definir las marcas que cada abogado puede ver
     const marcasPorAbogado = {
-      'Maria': ["Naf", "Vt"],
+      'Maria': ["Naf Naf", "Vt"],
       'Jota': ['AE', "Gs"],
       'Valen': ['BS', 'Che', 'MNG'],
       "Pao": ["Es", "Kl", "Cr"],
       "Cami": ["Rf", "AB"],
       "Cata": ["Su", "Ou", "Amcno"]
     };
+// Validación abogado
+if (!marcasPorAbogado.hasOwnProperty(abogado)) {
+  return res.status(404).json({ error: 'Abogado no encontrado' });
+}
+    
 
     const marcasExistentes = marcasPorAbogado[abogado] || []; // Marcas que el abogado puede ver
     const archivos = fs.readdirSync('legales/');
