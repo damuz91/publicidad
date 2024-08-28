@@ -1,0 +1,11 @@
+{
+  "name": "publicidad-1",
+  "version": "1.0.0",
+  "description": "Este proyecto debe crear un texto asociado a los legales basado en los parámetros que se encuentran en el formulario.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

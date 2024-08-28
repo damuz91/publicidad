@@ -77,7 +77,7 @@ exports.vista_abogado = async (req, res) => {
     const marcasPorAbogado = {
       'Maria': ["Naf Naf", "Vt"],
       'Jota': ['AE', "Gs"],
-      'Valen': ['BS', 'Che', 'MNG'],
+      'Valen': ['BS', 'Chevignon', 'MNG'],
       "Pao": ["Es", "Kl", "Cr"],
       "Cami": ["Rf", "AB"],
       "Cata": ["Su", "Ou", "Amcno"]
