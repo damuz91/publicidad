@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publicidad GCO</title>
+  <title>LegalAds</title>
   <!-- Load Bootstrap cdn-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
 
   <script>
 
@@ -32,11 +33,11 @@
         modo1 = "Referencias seleccionadas"
         //window.alert("Esto quiere decir que CIERTOS tus productos estarán con descuento")
       }
-               
-     
+           
       // Quitar la clase d-none que oculta el bloque de id paso2
       document.getElementById('paso2').classList.remove('d-none');
-    }
+
+      }
 
     function procesar_segundo_paso(){
       // Obtener el valor del input de tipo radio seleccionado con name = modo2
@@ -292,13 +293,16 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 style="color: rgb(255, 60, 0);">Publicidad</h1>
+        <br>
+        <H1>LegalAds</H1>
+        <br>
+        <hr>
+        <h2 style="color: rgba(0, 0, 255, 0.637);">!Elabora tu publicidad aquí!</h2>
         <form action="">
           <!-- 2 inputs -->
-          <br>
-          <hr>
+        <hr>
           <h2>Selecciona tu marca</h2>
-          <label for="marcas">Elige la marca:</label>
+          <label for="marcas">Elige tu marca:</label>
           <select id="marca" class="form-control" style="width: 200px; height: 40px;">
               <option value="Ae">AE</option>
               <option value="AB">American Brands</option>
@@ -315,13 +319,15 @@
               <option value="Ou">Outlet</option>
               <option value="Vt">Vivant</option>
               <option value="Su">Su+</option>
-
           </select>
           <br>
-          <hr>
+
           <label for="nombre_usuario">Ingresa tu nombre:</label>
-          <input type="text" name="nombre_usuario" placeholder="Carla Perez" class="form-control" style="width: 200px; height: 40px;" required>
+          <input type="text" name="nombre_usuario" placeholder="Pedro Gómez" class="form-control" style="width: 200px; height: 40px;" required>
+          
           <!-- ajustar el orden alfabético manualmente-->
+           <br>
+          <hr>
           <h2>¿Es un evento?</h2>
           <select id="tipoEvento" onchange="mostrarCampoEvento()">
               <option value="No">No</option>
@@ -360,7 +366,7 @@
               </label>
               <label for="">
                 <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="unico">
-                Unico descuento
+                Único descuento
               </label>
             </div>
           </div>
@@ -371,31 +377,32 @@
             <div id="fechas" class="form-group">
               <label for="desde">Fecha desde</label>
               <input style="width: 200px; height: 40px;" id="desde" type="date" class="form-control">
+              <br>
               <label for="hasta">Fecha hasta</label>
               <input style="width: 200px; height: 40px;" id="hasta" type="date" class="form-control">
             </div>
             <br>
             <div class="form-group" id="caja_descuento">
               <label for="descuento">Descuento</label>
-              <input style="width: 200px; height: 40px;" placeholder="Solo el # (sin %)" id="descuento" type="number" class="form-control">
+              <input style="width: 200px; height: 40px;"  placeholder="Solo el # (sin %)" id="descuento" type="number" class="form-control">
             </div>
  
             <div id="caja_rango">
               <div class="form-group">
-                <label style="font-size: smaller;" for="porcentaje_desde">
+                <label for="porcentaje_desde">
                   % Desde
                   <input style="width: 200px; height: 40px;" id="porcentaje_desde" type="number" class="form-control">
                 <label>
               </div>
                 <div class="form-group">
-                <label style="font-size: smaller;" for="porcentaje_hasta">
+                <label for="porcentaje_hasta">
                   % Hasta
                   <input style="width: 200px; height: 40px;" id="porcentaje_hasta" type="number" class="form-control">
                 <label>
               </div>
             </div>
 
-            <div id="caja_referencias_seleccionadas">
+            <div id="caja_referencias_seleccionadas" class="d-nonex">
               <div class="form-group">
                 <label for="">
                   Referencias Seleccionadas
@@ -427,7 +434,7 @@
           <div id="paso5">
             <h2>Clic para conocer legales</h2>
             <div class="form-group">
-              <button type="button" class="btn btn-success" onclick="generar()">Generar</button>
+              <button style="color: #000000;" type="button" class="btn btn-success" onclick="generar()">Generar</button>
               <a ></a>
             </div>
           </div>
@@ -439,6 +446,13 @@
   <!-- Load Bootstrap js cdn-->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<section>
+  <footer class="text-center">
+    <br>
+    <hr>
+    &copy; Gerencia de Asistencia Legal - GCO- Todos los derechos reservados.
+    <hr>
+</section>
 </body>
 </html>
-<!--Esto es una prueba-->
+
