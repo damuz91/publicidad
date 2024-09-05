@@ -27,11 +27,11 @@
       
       if(valor_paso1 == "toda"){
         modo1 = "Toda la tienda"
-        //window.alert ("Esto quiere decir que TODOS tus productos estarán con descuento")
+        window.alert ("Esto quiere decir que TODOS tus productos estarán con descuento")
       }
       if(valor_paso1 == "referencias"){
         modo1 = "Referencias seleccionadas"
-        //window.alert("Esto quiere decir que CIERTOS tus productos estarán con descuento")
+        window.alert("Esto quiere decir que ALGUNOS de los productos estarán con descuento")
       }
            
       // Quitar la clase d-none que oculta el bloque de id paso2
@@ -55,9 +55,11 @@
       if(valor_paso2 == "desde y hasta"){
         document.getElementById('caja_rango').classList.remove('d-none');
         document.getElementById('caja_descuento').classList.add('d-none');
+        document.getElementById('caja_referencias_seleccionadas').classList.remove('d-none');
       }else{
         document.getElementById('caja_rango').classList.add('d-none');
         document.getElementById('caja_descuento').classList.remove('d-none');
+        document.getElementById('caja_referencias_seleccionadas').classList.add('d-none');
       }
 
       // SI valor_paso1 es igual a "referencias" entonces mostrar el cuadrito id = 'caja_referencias_seleccionadas'
@@ -249,33 +251,20 @@
         
       // Paso5
       const Texto_complemento =  " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero."
-              
+      var textopieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + " " + modo1 + modo2 + idreferecias + " " + fecha_desde + " hasta el " + fecha_hasta + "aplica en" + " " + valores_paso4.join(", ")
+      
       var textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
       if (tipoEvento !== "" && tipoEvento !== "No") {
           textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
         }
           alert(textoFinal)
+          alert(textopieza)
       cuerpo_solicitud = {
         texto_creado: textoFinal, 
         marca: marca,
         nombre_usuario: nombre_usuario,
         evento: tipoEvento,
       }
-
-      // Paso6
-                  
-      var textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
-      if (tipoEvento !== "" && tipoEvento !== "No") {
-          textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
-        }
-          alert(textoFinal)
-      cuerpo_solicitud = {
-        texto_creado: textoFinal, 
-        marca: marca,
-        nombre_usuario: nombre_usuario,
-        evento: tipoEvento,
-      }
-
       
       fetch('http://localhost:3000/crear_legal', {
         method: 'POST',
@@ -307,29 +296,24 @@
 <body>
 
 <header>
-    <div class="back">
-      <div class="menu container">
-          <a ref="#" class="logo"></a>
-          <input id="menu"/>
-          <label for="menu">
-              <img src="img/logogco.jfif">
-          </label> 
-      </div>
+    <div class="back" style="text-align: center;">
+      <img src="img/logogco.jfif">
     </div>
 
   </header>
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <br>
-        <H1>LegalAds</H1>
+       <H1 style="color: rgb(173, 15, 126); text-align: center;">LegalAds</H1>
         <br>
         <hr>
-        <h2 style="color: rgba(0, 0, 255, 0.637);">¡Elabora tus legales aquí!</h2>
+        <h3 style="color: rgba(0, 0, 255, 0.637);">¡Elabora tus legales aquí!</h3>
+        <br>
+        <h4 style="color: rgba(5, 5, 5, 0.719)"><em>Por favor seguir el paso a paso que se detalla a continuación:</em></h4>
         <form action="">
           <!-- 2 inputs -->
         <hr>
-          <h2>Selecciona tu marca</h2>
+          <h2>Paso 1. Selecciona tu marca</h2>
           <label for="marcas">Elige tu marca:</label>
           <select id="marca" class="form-control" style="width: 200px; height: 40px;">
               <option value="Ae">AE</option>
@@ -351,24 +335,25 @@
           <br>
 
           <label for="nombre_usuario">Ingresa tu nombre:</label>
-          <input type="text" name="nombre_usuario" placeholder="Pedro Gómez" class="form-control" style="width: 200px; height: 40px;" required>
+          <input type="text" name="nombre_usuario" placeholder="Ejemplo: Pedro Gómez" class="form-control" style="width: 200px; height: 40px;" required>
           
           <!-- ajustar el orden alfabético manualmente-->
            <br>
           <hr>
-          <h2>¿Es un evento?</h2>
-          <select id="tipoEvento" onchange="mostrarCampoEvento()">
+          <h2>Paso 2. ¿Es un evento con medio de pago?</h2>
+            Ej: Tarjeta débito y crédito Bancolombia, Davivienda, Itaú, etc.
+          <select id="tipoEvento" onchange="mostrarCampoEvento()" class="form-control" style="width: 200px; height: 40px;">
               <option value="No">No</option>
               <option value="Evento">Sí, es un evento</option>
           </select>
-          <br><br>
+          <br>
           <div id="campoEvento" style="display: none;">
               <label for="nombreEvento">Nombre del evento:</label>
-              <input type="text" id="nombreEvento">
+              <input  class="form-control" style="width: 200px; height: 40px;" type="text" id="nombreEvento">
           </div>
           <hr>
           <div id="paso1">
-            <h2>Elige el modo de tu promoción</h2>
+            <h2>Paso 3. Elige el modo de tu promoción</h2>
             <div class="form-group">
               <label for="">
                 <input abbr title="Selecciona esta opción SÍ TODA la tienda están en promoción" type="radio" id="paso1_toda" name="paso1" value="toda" onclick="procesar_primer_paso()">
@@ -382,7 +367,7 @@
           </div>
           <hr>
           <div id="paso2" class="d-nonex">
-            <h2>Elige en qué aplica</h2>
+            <h2>Paso 4. Elige en qué aplica</h2>
             <div class="form-group">
               <label for="">
                 <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="desde y hasta">
@@ -400,7 +385,7 @@
           </div>
           <hr>
           <div id="paso3" class="d-nonex">
-            <h2>Indica la vigencia</h2>
+            <h2>Paso 5. Indica la vigencia</h2>
             
             <div id="fechas" class="form-group">
               <label for="desde">Fecha desde</label>
@@ -419,13 +404,13 @@
               <div class="form-group">
                 <label for="porcentaje_desde">
                   % Desde
-                  <input style="width: 200px; height: 40px;" id="porcentaje_desde" type="number" class="form-control">
+                  <input placeholder="Solo el # (sin %)" style="width: 200px; height: 40px;" id="porcentaje_desde" type="number" class="form-control">
                 <label>
               </div>
                 <div class="form-group">
                 <label for="porcentaje_hasta">
                   % Hasta
-                  <input style="width: 200px; height: 40px;" id="porcentaje_hasta" type="number" class="form-control">
+                  <input placeholder="Solo el # (sin %)" style="width: 200px; height: 40px;" id="porcentaje_hasta" type="number" class="form-control">
                 <label>
               </div>
             </div>
@@ -444,7 +429,7 @@
           </div>
           <hr>
           <div id="paso4">
-            <h2>Selecciona los lugares donde aplicará la promoción</h2>
+            <h2>Paso 6. Selecciona los lugares donde aplicará la promoción</h2>
             <div class="form-group">
               <label for="lugar"></label>
               <ul>
@@ -460,7 +445,7 @@
           </div>
            <br> 
           <div id="paso5">
-            <h2>Conoce aquí tus legales</h2>
+            <h2>Paso 7. Conoce aquí tus legales</h2>
             <div class="form-group">
               <button style="color: #000000;" type="button" class="btn btn-success" onclick="generar()">Click aquí </button>
               <a ></a>
@@ -475,10 +460,11 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
-  <br>
-  <br>
-
+  <br><br><br>
+  
   <nav>
+    <h5>Información de interés</h5>
+    <br>
     <a target="_blank" href="http://google.com">Guía piezas publicitarias</a>
     <br>
     <a target="_blank" href="https://www.searchenginejournal.com/about-us-page-examples/250967/">Guía para elaboración de publicidad</a>
