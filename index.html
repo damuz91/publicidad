@@ -261,6 +261,21 @@
         nombre_usuario: nombre_usuario,
         evento: tipoEvento,
       }
+
+      // Paso6
+                  
+      var textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+      if (tipoEvento !== "" && tipoEvento !== "No") {
+          textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+        }
+          alert(textoFinal)
+      cuerpo_solicitud = {
+        texto_creado: textoFinal, 
+        marca: marca,
+        nombre_usuario: nombre_usuario,
+        evento: tipoEvento,
+      }
+
       
       fetch('http://localhost:3000/crear_legal', {
         method: 'POST',
@@ -290,6 +305,19 @@
 
 </head>
 <body>
+
+<header>
+    <div class="back">
+      <div class="menu container">
+          <a ref="#" class="logo"></a>
+          <input id="menu"/>
+          <label for="menu">
+              <img src="img/logogco.jfif">
+          </label> 
+      </div>
+    </div>
+
+  </header>
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -297,7 +325,7 @@
         <H1>LegalAds</H1>
         <br>
         <hr>
-        <h2 style="color: rgba(0, 0, 255, 0.637);">¡Elabora tu publicidad aquí!</h2>
+        <h2 style="color: rgba(0, 0, 255, 0.637);">¡Elabora tus legales aquí!</h2>
         <form action="">
           <!-- 2 inputs -->
         <hr>
@@ -432,7 +460,7 @@
           </div>
            <br> 
           <div id="paso5">
-            <h2>Conocerás tus legales</h2>
+            <h2>Conoce aquí tus legales</h2>
             <div class="form-group">
               <button style="color: #000000;" type="button" class="btn btn-success" onclick="generar()">Click aquí </button>
               <a ></a>
@@ -440,17 +468,22 @@
           </div>
           
         </form>
-      </div>
+      </div> 
     </div>
   </div>
   <!-- Load Bootstrap js cdn-->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
+  <br>
+  <br>
+
   <nav>
-    <a target="_blank" href="http://google.com">Manual</a>
-    <a target="_blank" href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=44306">Ley 1480 de 2011</a>
+    <a target="_blank" href="http://google.com">Guía piezas publicitarias</a>
+    <br>
     <a target="_blank" href="https://www.searchenginejournal.com/about-us-page-examples/250967/">Guía para elaboración de publicidad</a>
+    <br>
+    <a target="_blank" href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=44306">Ley 1480 de 2011 - Estatuto del consumidor</a>
   </nav>
 
 <section>
