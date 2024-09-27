@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>LegalAds</title>
   <!-- Load Bootstrap cdn-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -251,11 +252,11 @@
         
       // Paso5
       const Texto_complemento =  " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero."
-      var textopieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + " " + modo1 + modo2 + idreferecias + " " + fecha_desde + " hasta el " + fecha_hasta + "aplica en" + " " + valores_paso4.join(", ")
+      var textopieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + " " + fecha_desde + " hasta el " + fecha_hasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Agregar Imagen de referencia si la imagen de fondo no entra" 
       
-      var textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+      var textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
       if (tipoEvento !== "" && tipoEvento !== "No") {
-          textoFinal = marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+          textoFinal = "\n" + marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
         }
           alert(textoFinal)
           alert(textopieza)
@@ -296,10 +297,11 @@
 <body>
 
 <header>
+  <br>
     <div class="back" style="text-align: center;">
-      <img src="img/logogco.jfif">
+      <img width="300" height="100" src="img/logo gco azul-8 1.png">
     </div>
-
+<br><br>
   </header>
   <div class="container">
     <div class="row">
@@ -325,7 +327,7 @@
               <option value="Es">Esprit</option>
               <option value="Rifle">Rifle</option>
               <option value="Gs">Gstar</option>
-              <option value="Kl">Kliikler</option>
+              <option value="Kl">Kliiker</option>
               <option value="MNG">Mango</option>
               <option value="Naf">Naf Naf</option>
               <option value="Ou">Outlet</option>
@@ -341,7 +343,7 @@
            <br>
           <hr>
           <h2>Paso 2. ¿Es un evento con medio de pago?</h2>
-            Ej: Tarjeta débito y crédito Bancolombia, Davivienda, Itaú, etc.
+            Ej: Tarjeta débito o crédito Bancolombia, Davivienda, Itaú, etc.
           <select id="tipoEvento" onchange="mostrarCampoEvento()" class="form-control" style="width: 200px; height: 40px;">
               <option value="No">No</option>
               <option value="Evento">Sí, es un evento</option>
@@ -434,7 +436,7 @@
               <label for="lugar"></label>
               <ul>
                 <li><input name="canal" value="Tienda física" type="checkbox"> <label for="lugar">Tienda física</label></li>
-                <li><input name="canal" value=" Whatsapp" type="checkbox"> <label for="lugar">Whatsapp</label></li>
+                <li><input name="canal" value=" Whatsapp" type="checkbox"> <label for="lugar">WhatsApp</label></li>
                 <li><input name="canal" value=" Online" type="checkbox"> <label for="lugar">Online</label></li>
                 <li><input name="canal" value=" Rappi" type="checkbox"> <label for="lugar">Rappi</label></li>
                 <li><input name="canal" value=" Falabella" type="checkbox"> <label for="lugar">Falabella</label></li>
@@ -463,7 +465,7 @@
   <br><br><br>
   
   <nav>
-    <h5>Información de interés</h5>
+    <h5 style="color: rgb(173, 15, 126); text-align: center;">Información de interés</h5>
     <br>
     <a target="_blank" href="#">Guía piezas publicitarias</a>
     <br>
@@ -476,9 +478,11 @@
   <footer class="text-center">
     <br>
     <hr>
-    &copy; Gerencia de Asistencia Legal - GCO- Todos los derechos reservados.
+    &copy; Gerencia de Asistencia Legal - GCO - Todos los derechos reservados.
     <hr>
-</section>
+    <img src="img/Recurso 2 1.png">
+    <br>
+    </section>
 </body>
 </html>
 
