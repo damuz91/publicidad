@@ -5,228 +5,265 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>LegalAds</title>
-  <!-- Load Bootstrap cdn-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <script>
+<header>
+    <div class="back" style="text-align: center;">
+      <img src="img/logogco.jfif">
+    </div>
+</header>
 
-    let valor_paso1;
-    let valor_paso2;
-    let valores_paso4;
-    let marca;
-    let nombre_usuario;
-    let tipoEvento = "";
-    let nombreEvento;
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+     <H1 style="color: rgb(173, 15, 126); text-align: center;">LegalAds</H1>
+      <br>
+      <hr>
+      <h3 style="color: rgba(0, 0, 255, 0.637);">¡Elabora tus legales aquí!</h3>
+      <br>
+      <h4 style="color: rgba(5, 5, 5, 0.719)"><em>Por favor seguir el paso a paso que se detalla a continuación:</em></h4>
+      <form action="">
+        <!-- Paso 1 -->
+        <hr>
+        <h2>Paso 1. Selecciona tu marca</h2>
+        <label for="marcas">Elige tu marca:</label>
+        <select id="marca" class="form-control" style="width: 200px; height: 40px;">
+            <option value="Ae">AE</option>
+            <option value="AB">American Brands</option>
+            <option value="Amcno">Americanino</option>
+            <option value="BS">Brandstore</option>
+            <option value="Cr">Carrera</option>
+            <option value="Che">Chevignon</option>
+            <option value="Es">Esprit</option>
+            <option value="Rifle">Rifle</option>
+            <option value="Gs">Gstar</option>
+            <option value="Kl">Kliikler</option>
+            <option value="MNG">Mango</option>
+            <option value="Naf">Naf Naf</option>
+            <option value="Ou">Outlet</option>
+            <option value="Vt">Vivant</option>
+            <option value="Su">Su+</option>
+        </select>
+        <br>
 
-    function procesar_primer_paso(){
-      
-      // Obtener el valor del input de tipo radio seleccionado con name = paso1
-      valor_paso1 = document.querySelector('input[name="paso1"]:checked').value;
-      
-      console.log("Se hizo click en el paso 1 y se seleccionó: " + valor_paso1);
-      
-      if(valor_paso1 == "toda"){
-        modo1 = "Toda la tienda"
-        window.alert ("Esto quiere decir que TODOS tus productos estarán con descuento")
-      }
-      if(valor_paso1 == "referencias"){
-        modo1 = "Referencias seleccionadas"
-        window.alert("Esto quiere decir que ALGUNOS de los productos estarán con descuento")
-      }
-           
-      // Quitar la clase d-none que oculta el bloque de id paso2
-      document.getElementById('paso2').classList.remove('d-none');
+        <label for="nombre_usuario">Ingresa tu nombre:</label>
+        <input type="text" name="nombre_usuario" placeholder="Ejemplo: Pedro Gómez" class="form-control" style="width: 200px; height: 40px;" required>
+        <br>
+        <hr>
+        <!-- Paso 2 -->
+        <h2>Paso 2. ¿Es un evento con medio de pago?</h2>
+          Ej: Tarjeta débito y crédito Bancolombia, Davivienda, Itaú, etc.
+        <select id="tipoEvento" onchange="mostrarCampoEvento()" class="form-control" style="width: 200px; height: 40px;">
+            <option value="No">No</option>
+            <option value="Evento">Sí, es un evento</option>
+        </select>
+        <br>
+        <div id="campoEvento" style="display: none;">
+            <label for="nombreEvento">Nombre del evento:</label>
+            <input  class="form-control" style="width: 200px; height: 40px;" type="text" id="nombreEvento">
+        </div>
+        <hr>
+        <!-- Paso 3 -->
+        <div id="paso1">
+          <h2>Paso 3. Elige el modo de tu promoción</h2>
+          <div class="form-group">
+            <label for="">
+              <input abbr title="Selecciona esta opción SÍ TODA la tienda están en promoción" type="radio" id="paso1_toda" name="paso1" value="toda" onclick="procesar_primer_paso()">
+              Toda la tienda
+            </label>
+            <label for="">
+              <input abbr title="Selecciona esta opción SÍ ALGUNAS las prendas están en promoción" type="radio" id="paso1_referencia_seleccionada" name="paso1" value="referencias" onclick="procesar_primer_paso()">
+              Referencias seleccionadas
+            </label>
+          </div>
+        </div>
+        <hr>
+        <!-- Paso 4 -->
+        <div id="paso2" class="d-none">
+          <h2>Paso 4. Elige en qué aplica</h2>
+          <div class="form-group">
+            <label for="">
+              <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="desde y hasta">
+              Desde y Hasta
+            </label>
+            <label for="">
+              <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="extra">
+              Descuento extra
+            </label>
+            <label for="">
+              <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="unico">
+              Único descuento
+            </label>
+          </div>
+        </div>
+        <hr>
+        <!-- Paso 5 -->
+        <div id="paso3" class="d-none">
+          <h2>Paso 5. Indica la vigencia</h2>
+          <div id="fechas" class="form-group">
+            <label for="desde">Fecha desde</label>
+            <input style="width: 200px; height: 40px;" id="desde" type="date" class="form-control">
+            <br>
+            <label for="hasta">Fecha hasta</label>
+            <input style="width: 200px; height: 40px;" id="hasta" type="date" class="form-control">
+          </div>
+          <br>
+          <div class="form-group" id="caja_descuento">
+            <label for="descuento">Descuento</label>
+            <input style="width: 200px; height: 40px;"  placeholder="Solo el # (sin %)" id="descuento" type="number" class="form-control">
+          </div>
 
-      }
+          <div id="caja_rango" class="d-none">
+            <div class="form-group">
+              <label for="porcentaje_desde">
+                % Desde
+                <input placeholder="Solo el # (sin %)" style="width: 200px; height: 40px;" id="porcentaje_desde" type="number" class="form-control">
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="porcentaje_hasta">
+                % Hasta
+                <input placeholder="Solo el # (sin %)" style="width: 200px; height: 40px;" id="porcentaje_hasta" type="number" class="form-control">
+              </label>
+            </div>
+          </div>
 
-    function procesar_segundo_paso(){
-      // Obtener el valor del input de tipo radio seleccionado con name = modo2
-      valor_paso2 = document.querySelector('input[name="modo2"]:checked').value;
-      
-      console.log("Se hizo click en el paso 2 y se seleccionó: " + valor_paso2);
+          <div id="caja_referencias_seleccionadas" class="d-none">
+            <div class="form-group">
+              <label for="">
+                Referencias Seleccionadas
+                <textarea placeholder="Ejemplos: Se identifican con sticker de color verde... La referencia inicia con el número 1... Se identifican con el % de descuento" class="form-control" name="textoreferencias" id="textoreferencias" cols="50" rows="5"></textarea>
+              </label>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <!-- Paso 6 -->
+        <div id="paso4" class="d-none">
+          <h2>Paso 6. Selecciona los lugares donde aplicará la promoción</h2>
+          <div class="form-group">
+            <label for="lugar"></label>
+            <ul>
+              <li><input name="canal" value="Tienda física" type="checkbox"> <label for="lugar">Tienda física</label></li>
+              <li><input name="canal" value="Whatsapp" type="checkbox"> <label for="lugar">Whatsapp</label></li>
+              <li><input name="canal" value="Online" type="checkbox"> <label for="lugar">Online</label></li>
+              <li><input name="canal" value="Rappi" type="checkbox"> <label for="lugar">Rappi</label></li>
+              <li><input name="canal" value="Falabella" type="checkbox"> <label for="lugar">Falabella</label></li>
+              <li><input name="canal" value="Outlets" type="checkbox"> <label for="lugar">Outlets</label></li>
+            </ul>
+          </div>
+        </div>
+         <br> 
+        <!-- Paso 7 -->
+        <div id="paso5" class="d-none">
+          <h2>Paso 7. Conoce aquí tus legales</h2>
+          <div class="form-group">
+            <button style="color: #000000;" type="button" class="btn btn-success" onclick="generar()">Click aquí </button>
+          </div>
+        </div>
+      </form>
+    </div> 
+  </div>
+</div>
 
-      // Mostrar el bloque de id paso3
-      document.getElementById('paso3').classList.remove('d-none');
-      document.getElementById('paso4').classList.remove('d-none');
-      document.getElementById('paso5').classList.remove('d-none');
 
-      // SI valor_paso2 es igual a "desde y hasta" entonces mostrar el bloque de caja_rango
-      // SINO mostrar el bloque de caja_descuento
-      if(valor_paso2 == "desde y hasta"){
-        document.getElementById('caja_rango').classList.remove('d-none');
-        document.getElementById('caja_descuento').classList.add('d-none');
-        document.getElementById('caja_referencias_seleccionadas').classList.remove('d-none');
-      }else{
-        document.getElementById('caja_rango').classList.add('d-none');
-        document.getElementById('caja_descuento').classList.remove('d-none');
-        document.getElementById('caja_referencias_seleccionadas').classList.add('d-none');
-      }
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-      // SI valor_paso1 es igual a "referencias" entonces mostrar el cuadrito id = 'caja_referencias_seleccionadas'
-      if(valor_paso1 == "referencias"){
-        document.getElementById('caja_referencias_seleccionadas').classList.remove('d-none');
-      }
-      
+
+<script>
+  let valor_paso1;
+  let valor_paso2;
+  let valores_paso4;
+  let marca;
+  let nombre_usuario;
+  let tipoEvento = "";
+  let nombreEvento;
+
+  function procesar_primer_paso(){
+    valor_paso1 = document.querySelector('input[name="paso1"]:checked').value;
+    console.log("Se hizo click en el paso 1 y se seleccionó: " + valor_paso1);
+    if(valor_paso1 == "toda"){
+      modo1 = "Toda la tienda";
+      window.alert ("Esto quiere decir que TODOS tus productos estarán con descuento");
     }
-    
-    function comoaplicadcto() {
-      var Texto_comoaplica =" "
-      const canales_seleccionados = document.querySelectorAll('input[name="canal"]:checked')
-      const array = Array.from(canales_seleccionados);
-      const canales = array.map((input) => input.value)
-    
-      
-      //El descuento en xxxxxx aplica al momento del pago. El descuento en xxxxx se encuentra aplicado en el precio del producto. "
-       
-      if ($.inArray('Tienda física',canales) || $.inArray(' Whatsapp',canales) || $.inArray(' Falabella',canales) || $.inArray(' Outlets',canales) ){
-        elementosAExcluir = [' Online',' Rappi'] 
-        const canalesFisicos = canales.filter(elemento => !elementosAExcluir.includes(elemento));
-        Texto_comoaplica = "El descuento en " +  canalesFisicos + " aplica al momento del pago."
-      }
-      
-      if ($.inArray(' Rappi',canales) || $.inArray('Online',canales)){
-        elementosAExcluir = ["Tienda física"," Whatsapp"," Falabella"," Outlets"]
-        const canalesDigitales= canales.filter(elemento=>!elementosAExcluir.includes(elemento))
-      Texto_comoaplica += " El descuento en " + canalesDigitales + " se encuentra aplicado en el precio del producto."
-      }
-
-  
-
-      //if (document.querySelector('input[value="tienda"]:checked') != null){
-        //Texto_comoaplica = "El descuento en tienda física aplica al momento del pago en caja"
-      //}
-        
-
-      //if (document.querySelector('input[value="online"]:checked') != null){
-        //Texto_comoaplica = "El descuento en tienda online se encuentra aplicado en el precio del producto"
-      //}
-        
-      
-      return Texto_comoaplica
+    if(valor_paso1 == "referencias"){
+      modo1 = "Referencias seleccionadas";
+      window.alert("Esto quiere decir que ALGUNOS de los productos estarán con descuento");
     }
+    document.getElementById('paso2').classList.remove('d-none');
+  }
 
-
-    function generar(){
-
-      //capturar la marca
-      e = document.getElementById("marca")
-      value = e.value;
-      marca = e.options[e.selectedIndex].text;
-
-
-      // Validaciones
-
-      // 0. Validar que el usuario haya ingresado su nombre
-      nombre_usuario = document.querySelector('input[name="nombre_usuario"]').value
-      // Remover los espacios en blanco al inicio y al final
-      nombre_usuario = nombre_usuario.trim()
-      if(nombre_usuario == ""){
-        alert("Debes ingresar tu nombre")
-        return
-      }
-      tipoEvento = document.getElementById("tipoEvento").value
-      if (tipoEvento === "Evento") {
-                tipoEvento = document.getElementById("nombreEvento").value;
-            }
-             // Validaciones
-      // 1. Validar que en el paso 4 se haya seleccionado por lo menos una opción
-
-      // Declarar un vector vacío
-      valores_paso4 = []
-      
-      // Obtener todos los inputs de tipo checkbox que estén seleccionados
-      let checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-
-      // Recorrer el vector de checkboxes y guardar los valores en el vector valores_paso4
-      for (let i = 0; i < checkboxes.length; i++) {
-        valores_paso4.push(checkboxes[i].value)
-      }
-
-      // Si el vector valores_paso4 está vacío entonces mostrar un alert
-      if(valores_paso4.length == 0){
-        alert("Debes seleccionar por lo menos una opción en el paso 4")
-      }
-
-      // 2. Que la fecha desde no sea menor que a hoy Y que la fecha hasta no sea menor que la fecha desde
-      let fecha_desde = document.getElementById('desde').value
-        let hoy = new Date().toISOString().split('T')[0]
-        const fechaActual = new Date();
-        const opciones = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-      console.log(fechaActual.toLocaleDateString('es-es', opciones));
-        //Friday, Jul 2, 2021
-      if(fecha_desde < hoy){
-        alert("La fecha desde no puede ser menor que hoy")
-        return
-      }
-
-      // 3. Que la fecha hasta no sea menor que la fecha desde
-      let fecha_hasta = document.getElementById('hasta').value
-      if(fecha_hasta < fecha_desde){
-        alert("La fecha hasta no puede ser menor que la fecha desde")
-        return
-      }
-
-      // La validación 4 solo se  hace si el valor_paso2 es igual a "desde y hasta"
-      // La validación 5 solo se hace si el valor_paso2 es igual a "extra" o "unico"
-
-      // 4. Que el porcentaje_hasta no sea menor que porcentaje_desde
-
-      if(valor_paso2 == "desde y hasta"){
-        let porcentaje_desde = document.getElementById('porcentaje_desde').value
-        let porcentaje_hasta = document.getElementById('porcentaje_hasta').value
-        if(porcentaje_hasta < porcentaje_desde){
-          alert("El porcentaje hasta no puede ser menor que el porcentaje desde")
-          return
-        }
-      }
-
-      // 5. Que el descuento no sea mayor que 90 ni menor que 10
-      if(valor_paso2 == "extra" || valor_paso2 == "unico"){
-        let descuento = document.getElementById('descuento').value
-        if(descuento > 90 || descuento < 10){
-          alert("El descuento no puede ser mayor que 90 ni menor que 10")
-          return
-        }
-      }
-
-      // 6. Que si el valor_paso1 es igual a "referencias" entonces el textarea no esté vacío
-      if(valor_paso1 == "referencias"){
-        let referencias = document.querySelector('textarea[name="textoreferencias"]').value
-        if(referencias == ""){
-          alert("Debes escribir por lo menos una identificación de la referencia seleccionada (Sticker, Código, Colección)")
-          return
-        }
-      }
-      tipoEvento = document.getElementById("tipoEvento").value;
-       // Si es un evento, capturar el nombre del evento
-       if (tipoEvento === "Evento") {
-                const nombreEvento = document.getElementById("nombreEvento").value;
-                // Asignar el nombre del evento a la variable tipoEvento
-                tipoEvento = nombreEvento;
-            }
-      concatenar()
-      
+  function procesar_segundo_paso(){
+    valor_paso2 = document.querySelector('input[name="modo2"]:checked').value;
+    console.log("Se hizo click en el paso 2 y se seleccionó: " + valor_paso2);
+    document.getElementById('paso3').classList.remove('d-none');
+    document.getElementById('paso4').classList.remove('d-none');
+    document.getElementById('paso5').classList.remove('d-none');
+    if(valor_paso2 == "desde y hasta"){
+      document.getElementById('caja_rango').classList.remove('d-none');
+      document.getElementById('caja_descuento').classList.add('d-none');
+      document.getElementById('caja_referencias_seleccionadas').classList.remove('d-none');
+    }else{
+      document.getElementById('caja_rango').classList.add('d-none');
+      document.getElementById('caja_descuento').classList.remove('d-none');
+      document.getElementById('caja_referencias_seleccionadas').classList.add('d-none');
     }
+    if(valor_paso1 == "referencias"){
+      document.getElementById('caja_referencias_seleccionadas').classList.remove('d-none');
+    }
+  }
 
-    function concatenar(){
-      texto_final = ""
-
-      // Variables:
-
-      // Paso 1
-      if(valor_paso1 == "toda"){
-        modo1 = "Toda la tienda"
+  function comoaplicadcto() {
+    let Texto_comoaplica = "";
+    const canales_seleccionados = document.querySelectorAll('input[name="canal"]:checked');
+    const array = Array.from(canales_seleccionados);
+    const canales = array.map((input) => input.value);
+    if (canales.includes('Tienda física') || canales.includes('Whatsapp') || canales.includes('Falabella') || canales.includes('Outlets')) {
+      const elementosAExcluir = ['Online', 'Rappi'];
+      const canalesFisicos = canales.filter(elemento => !elementosAExcluir.includes(elemento));
+      if (canalesFisicos.length > 0) {
+        Texto_comoaplica = "El descuento en " + canalesFisicos.join(', ') + " aplica al momento del pago.";
       }
-      if(valor_paso1 == "referencias"){
-        modo1 = "Referencias seleccionadas"
+    }
+    if (canales.includes('Rappi') || canales.includes('Online')){
+      const elementosAExcluir = ["Tienda física","Whatsapp","Falabella","Outlets"];
+      const canalesDigitales = canales.filter(elemento => !elementosAExcluir.includes(elemento));
+      if (canalesDigitales.length > 0) {
+        Texto_comoaplica += " El descuento en " + canalesDigitales.join(', ') + " se encuentra aplicado en el precio del producto.";
       }
+    }
+    return Texto_comoaplica;
+  }
 
-      // Paso 2
-      if(valor_paso2 == "desde y hasta"){
-        modo2 = " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%"
-      }
+  function generar(){
+    e = document.getElementById("marca");
+    marca = e.options[e.selectedIndex].text;
+    nombre_usuario = document.querySelector('input[name="nombre_usuario"]').value.trim();
+    if(nombre_usuario == ""){
+      alert("Debes ingresar tu nombre");
+      return;
+    }
+    tipoEvento = document.getElementById("tipoEvento").value;
+    if (tipoEvento === "Evento") {
+      tipoEvento = document.getElementById("nombreEvento").value;
+    }
+    valores_paso4 = [];
+    let checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+    for (let i = 0; i < checkboxes.length; i++) {
+      valores_paso4.push(checkboxes[i].value);
+    }
+    if(valores_paso4.length == 0){
+      alert("Debes seleccionar por lo menos una opción en el paso 4");
+      return;
+    }
+    concatenar();
+  }
 
+<<<<<<< HEAD
       else if(valor_paso2 == "extra"){
         modo2 = " con descuento extra del " + document.getElementById('descuento').value + "%" + ","
       }
@@ -261,13 +298,47 @@
           alert(textoFinal)
           alert(textopieza)
       cuerpo_solicitud = {
+=======
+  function concatenar(){
+    let texto_final = "";
+    let modo1 = valor_paso1 == "toda" ? "Toda la tienda" : "Referencias seleccionadas";
+    let modo2 = valor_paso2 == "desde y hasta" ? 
+      " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%" :
+      valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%" :
+      "";
+    let fecha_desde = document.getElementById('desde').value;
+    let fecha_hasta = document.getElementById('hasta').value;
+    let [anioDesde, mesDesde, diaDesde] = fecha_desde.split('-');
+    let [anioHasta, mesHasta, diaHasta] = fecha_hasta.split('-');
+    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    let fechaFormateadaDesde = `${parseInt(diaDesde)} de ${meses[parseInt(mesDesde) - 1]} de ${anioDesde}`;
+    let fechaFormateadaHasta = `${parseInt(diaHasta)} de ${meses[parseInt(mesHasta) - 1]} de ${anioHasta}`;
+    let Texto_complemento = " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.";
+    let textoFinal = marca + " " + modo1 + modo2 + " desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+    if (tipoEvento !== "" && tipoEvento !== "No") {
+      textoFinal = marca + " " + modo1 + modo2 + " desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+    }
+    alert(textoFinal);
+    cuerpo_solicitud = {
+>>>>>>> 87494a3 (cambio)
         texto_creado: textoFinal, 
         marca: marca,
         nombre_usuario: nombre_usuario,
         evento: tipoEvento,
       }
-      
-      fetch('http://localhost:3000/crear_legal', {
+ }
+
+  function mostrarCampoEvento() {
+    const tipoEvento = document.getElementById("tipoEvento").value;
+    const campoEvento = document.getElementById("campoEvento");
+    if (tipoEvento === "Evento") {
+      campoEvento.style.display = "block";
+    } else {
+      campoEvento.style.display = "none";
+    }
+  }
+
+fetch('http://localhost:3000/crear_legal', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -280,19 +351,8 @@
       }).catch(function(error){
         console.log("Hubo un error", error)
       })
-    }
-    // Función para mostrar u ocultar el campo de texto del nombre del evento según la selección del usuario
-    function mostrarCampoEvento() {
-            const tipoEvento = document.getElementById("tipoEvento").value;
-            const campoEvento = document.getElementById("campoEvento");
-            if (tipoEvento === "Evento") {
-                campoEvento.style.display = "block";
-            } else {
-                campoEvento.style.display = "none";
-            }
-        }
-  </script>
 
+<<<<<<< HEAD
 </head>
 <body>
 
@@ -473,6 +533,22 @@
     <br>
     <a target="_blank" href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=44306">Ley 1480 de 2011 - Estatuto del consumidor</a>
   </nav>
+=======
+    
+  
+</script>
+
+<br><br><br>
+<nav>
+  <h5>Información de interés</h5>
+  <br>
+  <a target="_blank" href="#">Guía piezas publicitarias</a>
+  <br>
+  <a target="_blank" href="#">Guía para elaboración de publicidad</a>
+  <br>
+  <a target="_blank" href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=44306">Ley 1480 de 2011 - Estatuto del consumidor</a>
+</nav>
+>>>>>>> 87494a3 (cambio)
 
 <section>
   <footer class="text-center">
@@ -480,9 +556,17 @@
     <hr>
     &copy; Gerencia de Asistencia Legal - GCO - Todos los derechos reservados.
     <hr>
+<<<<<<< HEAD
     <img src="img/Recurso 2 1.png">
     <br>
     </section>
+=======
+  </footer>
+</section>
+
+>>>>>>> 87494a3 (cambio)
 </body>
 </html>
-
+  } 
+  
+  
