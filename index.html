@@ -11,21 +11,22 @@
 <body>
 
 <header>
+  <br>
     <div class="back" style="text-align: center;">
-      <img src="img/logogco.jfif">
+      <img width="300" height="100" src="img/logo gco azul-8 1.png">
     </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-     <H1 style="color: rgb(173, 15, 126); text-align: center;">LegalAds</H1>
-      <br>
-      <hr>
-      <h3 style="color: rgba(0, 0, 255, 0.637);">¡Elabora tus legales aquí!</h3>
-      <br>
-      <h4 style="color: rgba(5, 5, 5, 0.719)"><em>Por favor seguir el paso a paso que se detalla a continuación:</em></h4>
-      <form action="">
+<br><br>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+       <H1 style="color: rgb(173, 15, 126); text-align: center;">LegalAds</H1>
+        <br>
+        <hr>
+        <h3 style="color: rgba(0, 0, 255, 0.637);">¡Elabora tus legales aquí!</h3>
+        <br>
+        <h4 style="color: rgba(5, 5, 5, 0.719)"><em>Por favor seguir el paso a paso que se detalla a continuación:</em></h4>
+        <form action="">        
         <!-- Paso 1 -->
         <hr>
         <h2>Paso 1. Selecciona tu marca</h2>
@@ -263,42 +264,6 @@
     concatenar();
   }
 
-<<<<<<< HEAD
-      else if(valor_paso2 == "extra"){
-        modo2 = " con descuento extra del " + document.getElementById('descuento').value + "%" + ","
-      }
-
-      else if(valor_paso2 == 'unico'){
-        modo2 = ""
-      }
-
-      // Paso 3
-        fecha_desde = document.getElementById('desde').value
-        fecha_hasta = document.getElementById('hasta').value
-        const opciones = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-        fecha_desde = new Date(fecha_desde).toLocaleDateString('es-es', opciones)
-        fecha_hasta = new Date(fecha_hasta).toLocaleDateString('es-es', opciones)
-
-      //Paso 4
-      if (valor_paso1 =="referencias")
-      idreferecias = document.getElementById("textoreferencias").value
-      else 
-      idreferecias = ""
-
-
-        
-      // Paso5
-      const Texto_complemento =  " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero."
-      var textopieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + " " + fecha_desde + " hasta el " + fecha_hasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Agregar Imagen de referencia si la imagen de fondo no entra" 
-      
-      var textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
-      if (tipoEvento !== "" && tipoEvento !== "No") {
-          textoFinal = "\n" + marca + " " + modo1 + modo2 + idreferecias + " " + "desde el" + " " + fecha_desde + " " + "hasta el" + " " + fecha_hasta + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
-        }
-          alert(textoFinal)
-          alert(textopieza)
-      cuerpo_solicitud = {
-=======
   function concatenar(){
     let texto_final = "";
     let modo1 = valor_paso1 == "toda" ? "Toda la tienda" : "Referencias seleccionadas";
@@ -314,31 +279,24 @@
     let fechaFormateadaDesde = `${parseInt(diaDesde)} de ${meses[parseInt(mesDesde) - 1]} de ${anioDesde}`;
     let fechaFormateadaHasta = `${parseInt(diaHasta)} de ${meses[parseInt(mesHasta) - 1]} de ${anioHasta}`;
     let Texto_complemento = " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.";
-    let textoFinal = marca + " " + modo1 + modo2 + " desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+    let textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
     if (tipoEvento !== "" && tipoEvento !== "No") {
       textoFinal = marca + " " + modo1 + modo2 + " desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
     }
-    alert(textoFinal);
-    cuerpo_solicitud = {
->>>>>>> 87494a3 (cambio)
+    let textoPieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + " " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Agregar Imagen de ref si la imagen de fondo es de muestra" 
+      alert(textoFinal);
+      alert(textoPieza);
+  }
+
+  function enviarSolicitud() {
+      const cuerpo_solicitud = {
         texto_creado: textoFinal, 
         marca: marca,
         nombre_usuario: nombre_usuario,
         evento: tipoEvento,
       }
- }
-
-  function mostrarCampoEvento() {
-    const tipoEvento = document.getElementById("tipoEvento").value;
-    const campoEvento = document.getElementById("campoEvento");
-    if (tipoEvento === "Evento") {
-      campoEvento.style.display = "block";
-    } else {
-      campoEvento.style.display = "none";
-    }
-  }
-
-fetch('http://localhost:3000/crear_legal', {
+ 
+    fetch('http://localhost:3000/crear_legal', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -350,205 +308,27 @@ fetch('http://localhost:3000/crear_legal', {
         console.log("El servidor me devolvió una respuesta exitosa con los datos,", data)
       }).catch(function(error){
         console.log("Hubo un error", error)
-      })
-
-<<<<<<< HEAD
-</head>
-<body>
-
-<header>
-  <br>
-    <div class="back" style="text-align: center;">
-      <img width="300" height="100" src="img/logo gco azul-8 1.png">
-    </div>
-<br><br>
-  </header>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-       <H1 style="color: rgb(173, 15, 126); text-align: center;">LegalAds</H1>
-        <br>
-        <hr>
-        <h3 style="color: rgba(0, 0, 255, 0.637);">¡Elabora tus legales aquí!</h3>
-        <br>
-        <h4 style="color: rgba(5, 5, 5, 0.719)"><em>Por favor seguir el paso a paso que se detalla a continuación:</em></h4>
-        <form action="">
-          <!-- 2 inputs -->
-        <hr>
-          <h2>Paso 1. Selecciona tu marca</h2>
-          <label for="marcas">Elige tu marca:</label>
-          <select id="marca" class="form-control" style="width: 200px; height: 40px;">
-              <option value="Ae">AE</option>
-              <option value="AB">American Brands</option>
-              <option value="Amcno">Americanino</option>
-              <option value="BS">Brandstore</option>
-              <option value="Cr">Carrera</option>
-              <option value="Che">Chevignon</option>
-              <option value="Es">Esprit</option>
-              <option value="Rifle">Rifle</option>
-              <option value="Gs">Gstar</option>
-              <option value="Kl">Kliiker</option>
-              <option value="MNG">Mango</option>
-              <option value="Naf">Naf Naf</option>
-              <option value="Ou">Outlet</option>
-              <option value="Vt">Vivant</option>
-              <option value="Su">Su+</option>
-          </select>
-          <br>
-
-          <label for="nombre_usuario">Ingresa tu nombre:</label>
-          <input type="text" name="nombre_usuario" placeholder="Ejemplo: Pedro Gómez" class="form-control" style="width: 200px; height: 40px;" required>
-          
-          <!-- ajustar el orden alfabético manualmente-->
-           <br>
-          <hr>
-          <h2>Paso 2. ¿Es un evento con medio de pago?</h2>
-            Ej: Tarjeta débito o crédito Bancolombia, Davivienda, Itaú, etc.
-          <select id="tipoEvento" onchange="mostrarCampoEvento()" class="form-control" style="width: 200px; height: 40px;">
-              <option value="No">No</option>
-              <option value="Evento">Sí, es un evento</option>
-          </select>
-          <br>
-          <div id="campoEvento" style="display: none;">
-              <label for="nombreEvento">Nombre del evento:</label>
-              <input  class="form-control" style="width: 200px; height: 40px;" type="text" id="nombreEvento">
-          </div>
-          <hr>
-          <div id="paso1">
-            <h2>Paso 3. Elige el modo de tu promoción</h2>
-            <div class="form-group">
-              <label for="">
-                <input abbr title="Selecciona esta opción SÍ TODA la tienda están en promoción" type="radio" id="paso1_toda" name="paso1" value="toda" onclick="procesar_primer_paso()">
-                Toda la tienda
-              </label>
-              <label for="">
-                <input abbr title="Selecciona esta opción SÍ ALGUNAS las prendas están en promoción" type="radio" id="paso1_referencia_seleccionada" name="paso1" value="referencias" onclick="procesar_primer_paso()">
-                Referencias seleccionadas
-              </label>
-            </div>
-          </div>
-          <hr>
-          <div id="paso2" class="d-nonex">
-            <h2>Paso 4. Elige en qué aplica</h2>
-            <div class="form-group">
-              <label for="">
-                <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="desde y hasta">
-                Desde y Hasta
-              </label>
-              <label for="">
-                <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="extra">
-                Descuento extra
-              </label>
-              <label for="">
-                <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="unico">
-                Único descuento
-              </label>
-            </div>
-          </div>
-          <hr>
-          <div id="paso3" class="d-nonex">
-            <h2>Paso 5. Indica la vigencia</h2>
-            
-            <div id="fechas" class="form-group">
-              <label for="desde">Fecha desde</label>
-              <input style="width: 200px; height: 40px;" id="desde" type="date" class="form-control">
-              <br>
-              <label for="hasta">Fecha hasta</label>
-              <input style="width: 200px; height: 40px;" id="hasta" type="date" class="form-control">
-            </div>
-            <br>
-            <div class="form-group" id="caja_descuento">
-              <label for="descuento">Descuento</label>
-              <input style="width: 200px; height: 40px;"  placeholder="Solo el # (sin %)" id="descuento" type="number" class="form-control">
-            </div>
- 
-            <div id="caja_rango">
-              <div class="form-group">
-                <label for="porcentaje_desde">
-                  % Desde
-                  <input placeholder="Solo el # (sin %)" style="width: 200px; height: 40px;" id="porcentaje_desde" type="number" class="form-control">
-                <label>
-              </div>
-                <div class="form-group">
-                <label for="porcentaje_hasta">
-                  % Hasta
-                  <input placeholder="Solo el # (sin %)" style="width: 200px; height: 40px;" id="porcentaje_hasta" type="number" class="form-control">
-                <label>
-              </div>
-            </div>
-
-            <div id="caja_referencias_seleccionadas" class="d-nonex">
-              <div class="form-group">
-                <label for="">
-                  Referencias Seleccionadas
-                  <textarea placeholder="Ejemplos: Se identifican con sticker de color verde...
-                  La referencia inicia con el número 1... 
-                  Se identifican con el % de descuento" class="form-control" name="textoreferencias" id="textoreferencias" cols="50" rows="5"></textarea>
-                </label>
-              </div>
-            </div> 
-            
-          </div>
-          <hr>
-          <div id="paso4">
-            <h2>Paso 6. Selecciona los lugares donde aplicará la promoción</h2>
-            <div class="form-group">
-              <label for="lugar"></label>
-              <ul>
-                <li><input name="canal" value="Tienda física" type="checkbox"> <label for="lugar">Tienda física</label></li>
-                <li><input name="canal" value=" Whatsapp" type="checkbox"> <label for="lugar">WhatsApp</label></li>
-                <li><input name="canal" value=" Online" type="checkbox"> <label for="lugar">Online</label></li>
-                <li><input name="canal" value=" Rappi" type="checkbox"> <label for="lugar">Rappi</label></li>
-                <li><input name="canal" value=" Falabella" type="checkbox"> <label for="lugar">Falabella</label></li>
-                <li><input name="canal" value=" Outlets" type="checkbox"> <label for="lugar">Outlets</label></li>
-
-              </ul>
-            </div>
-          </div>
-           <br> 
-          <div id="paso5">
-            <h2>Paso 7. Conoce aquí tus legales</h2>
-            <div class="form-group">
-              <button style="color: #000000;" type="button" class="btn btn-success" onclick="generar()">Click aquí </button>
-              <a ></a>
-            </div>
-          </div>
-          
-        </form>
-      </div> 
-    </div>
-  </div>
-  <!-- Load Bootstrap js cdn-->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      })     
+  }
   
-  <br><br><br>
-  
-  <nav>
-    <h5 style="color: rgb(173, 15, 126); text-align: center;">Información de interés</h5>
-    <br>
-    <a target="_blank" href="#">Guía piezas publicitarias</a>
-    <br>
-    <a target="_blank" href="#">Guía para elaboración de publicidad</a>
-    <br>
-    <a target="_blank" href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=44306">Ley 1480 de 2011 - Estatuto del consumidor</a>
-  </nav>
-=======
-    
-  
+  function mostrarCampoEvento() {
+    const tipoEvento = document.getElementById("tipoEvento").value;
+    const campoEvento = document.getElementById("campoEvento");
+    if (tipoEvento === "Evento") {
+      campoEvento.style.display = "block";
+    } else {
+      campoEvento.style.display = "none";
+    }
+  }  
 </script>
 
 <br><br><br>
 <nav>
   <h5>Información de interés</h5>
-  <br>
-  <a target="_blank" href="#">Guía piezas publicitarias</a>
-  <br>
-  <a target="_blank" href="#">Guía para elaboración de publicidad</a>
+  <a target="_blank" href="recursos/Circular 001 - Manual de consumidor Capitulo Publicidad.pdf">Guía para elaboración de publicidad online</a>
   <br>
   <a target="_blank" href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=44306">Ley 1480 de 2011 - Estatuto del consumidor</a>
 </nav>
->>>>>>> 87494a3 (cambio)
 
 <section>
   <footer class="text-center">
@@ -556,17 +336,11 @@ fetch('http://localhost:3000/crear_legal', {
     <hr>
     &copy; Gerencia de Asistencia Legal - GCO - Todos los derechos reservados.
     <hr>
-<<<<<<< HEAD
     <img src="img/Recurso 2 1.png">
-    <br>
+    <br><br>
     </section>
-=======
-  </footer>
-</section>
-
->>>>>>> 87494a3 (cambio)
 </body>
 </html>
-  } 
+ 
   
   
