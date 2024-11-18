@@ -271,6 +271,7 @@
       " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%" :
       valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%" :
       "";
+      valor_paso2 == "unico" ? " con descuento del " + document.getElementById('descuento').value + "%" : "";
     let fecha_desde = document.getElementById('desde').value;
     let fecha_hasta = document.getElementById('hasta').value;
     let [anioDesde, mesDesde, diaDesde] = fecha_desde.split('-');
@@ -278,6 +279,10 @@
     const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
     let fechaFormateadaDesde = `${parseInt(diaDesde)} de ${meses[parseInt(mesDesde) - 1]} de ${anioDesde}`;
     let fechaFormateadaHasta = `${parseInt(diaHasta)} de ${meses[parseInt(mesHasta) - 1]} de ${anioHasta}`;
+    let referenciasSeleccionadas = "";
+    if (valor_paso1 == "toda" && valor_paso2 == "desde y hasta") {
+        referenciasSeleccionadas = " Las referencias se encuentran identificadas con " + document.getElementById('textoreferencias').value.trim() + ".";
+    }
     let Texto_complemento = " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.";
     let textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
     if (tipoEvento !== "" && tipoEvento !== "No") {
