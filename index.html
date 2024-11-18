@@ -136,7 +136,7 @@
             <div class="form-group">
               <label for="">
                 Referencias Seleccionadas
-                <textarea placeholder="Ejemplos: Se identifican con sticker de color verde... La referencia inicia con el número 1... Se identifican con el % de descuento" class="form-control" name="textoreferencias" id="textoreferencias" cols="50" rows="5"></textarea>
+                <textarea placeholder="Se identifican con (identifica las referencias) " class="form-control" name="textoreferencias" id="textoreferencias" cols="50" rows="5"></textarea>
               </label>
             </div>
           </div>
@@ -183,7 +183,7 @@
   let nombre_usuario;
   let tipoEvento = "";
   let nombreEvento;
-
+ 
   function procesar_primer_paso(){
     valor_paso1 = document.querySelector('input[name="paso1"]:checked').value;
     console.log("Se hizo click en el paso 1 y se seleccionó: " + valor_paso1);
@@ -197,7 +197,7 @@
     }
     document.getElementById('paso2').classList.remove('d-none');
   }
-
+ 
   function procesar_segundo_paso(){
     valor_paso2 = document.querySelector('input[name="modo2"]:checked').value;
     console.log("Se hizo click en el paso 2 y se seleccionó: " + valor_paso2);
@@ -217,7 +217,7 @@
       document.getElementById('caja_referencias_seleccionadas').classList.remove('d-none');
     }
   }
-
+ 
   function comoaplicadcto() {
     let Texto_comoaplica = "";
     const canales_seleccionados = document.querySelectorAll('input[name="canal"]:checked');
@@ -239,7 +239,7 @@
     }
     return Texto_comoaplica;
   }
-
+ 
   function generar(){
     e = document.getElementById("marca");
     marca = e.options[e.selectedIndex].text;
@@ -263,14 +263,15 @@
     }
     concatenar();
   }
-
+ 
   function concatenar(){
     let texto_final = "";
     let modo1 = valor_paso1 == "toda" ? "Toda la tienda" : "Referencias seleccionadas";
-    let modo2 = valor_paso2 == "desde y hasta" ? 
-      " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%" :
+    let modo2 = valor_paso2 == "desde y hasta" ?
+      " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%" + " de descuento.":
       valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%" :
       "";
+      valor_paso2 == "unico" ? " con descuento del " + document.getElementById('descuento').value + "%" : "";
     let fecha_desde = document.getElementById('desde').value;
     let fecha_hasta = document.getElementById('hasta').value;
     let [anioDesde, mesDesde, diaDesde] = fecha_desde.split('-');
@@ -278,15 +279,26 @@
     const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
     let fechaFormateadaDesde = `${parseInt(diaDesde)} de ${meses[parseInt(mesDesde) - 1]} de ${anioDesde}`;
     let fechaFormateadaHasta = `${parseInt(diaHasta)} de ${meses[parseInt(mesHasta) - 1]} de ${anioHasta}`;
-    let Texto_complemento = " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.";
-    let textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
-    if (tipoEvento !== "" && tipoEvento !== "No") {
-      textoFinal = marca + " " + modo1 + modo2 + " desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " " + comoaplicadcto() + Texto_complemento;
+     
+    if (valor_paso1 == "referencias")  
+    idreferecias = " Las referencias seleccionadas se identifican con " + document.getElementById("textoreferencias").value + "." ;
+    else
+    idreferecias = ""
+    let referenciasSeleccionadas = "";
+    if (valor_paso1 == "toda" && valor_paso2 == "desde y hasta") {
+      referenciasSeleccionadas = " Las referencias se encuentran identificadas con " + document.getElementById('textoreferencias').value.trim() + ".";
     }
-    let textoPieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + " " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Agregar Imagen de ref si la imagen de fondo es de muestra" 
-      alert(textoFinal);
-      alert(textoPieza);
-  }
+    
+    let Texto_complemento = " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.";
+    let textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " Desde el " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + referenciasSeleccionadas + idreferecias + " " + comoaplicadcto() + Texto_complemento;
+    if (tipoEvento !== "" && tipoEvento !== "No") {
+      textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " Desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + referenciasSeleccionadas + idreferecias + " " + comoaplicadcto() + Texto_complemento;
+    }
+    let textoPieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + referenciasSeleccionadas + " " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Si la imagen de fondo es de muestra, recuerda agregar -Imagen de ref.-" 
+    
+    alert(textoFinal);
+    alert(textoPieza)
+  
 
   function enviarSolicitud() {
       const cuerpo_solicitud = {
@@ -295,8 +307,10 @@
         nombre_usuario: nombre_usuario,
         evento: tipoEvento,
       }
- 
-    fetch('http://localhost:3000/crear_legal', {
+    }  
+  }
+
+ fetch('http://localhost:3000/crear_legal', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -308,9 +322,8 @@
         console.log("El servidor me devolvió una respuesta exitosa con los datos,", data)
       }).catch(function(error){
         console.log("Hubo un error", error)
-      })     
-  }
-  
+      })
+    
   function mostrarCampoEvento() {
     const tipoEvento = document.getElementById("tipoEvento").value;
     const campoEvento = document.getElementById("campoEvento");
@@ -319,8 +332,9 @@
     } else {
       campoEvento.style.display = "none";
     }
-  }  
-</script>
+  }
+  
+ </script>
 
 <br><br><br>
 <nav>
