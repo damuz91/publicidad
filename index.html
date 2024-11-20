@@ -283,9 +283,9 @@
     let modo1 = valor_paso1 == "toda" ? "Toda la tienda" : "Referencias seleccionadas";
     let modo2 = valor_paso2 == "desde y hasta" ?
       " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%" + " de descuento.":
-      valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%" :
-      "";
-      valor_paso2 == "unico" ? " con descuento del " + document.getElementById('descuento').value + "%" : "";
+      valor_paso2 == "unico" ? " con descuento del " + document.getElementById('descuento').value + "%" + "":
+      valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%" : "";
+     
     let fecha_desde = document.getElementById('desde').value;
     let fecha_hasta = document.getElementById('hasta').value;
     let [anioDesde, mesDesde, diaDesde] = fecha_desde.split('-');
