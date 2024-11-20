@@ -82,6 +82,7 @@ exports.vista_abogado = async (req, res) => {
       "Cami": ["Rf", "AB"],
       "Cata": ["Su", "Ou", "Amcno"]
     };
+    console.log("Abogado: "+abogado + " Lista de abogados: "+marcasPorAbogado)
 // Validación abogado
 if (!marcasPorAbogado.hasOwnProperty(abogado)) {
   return res.status(404).json({ error: 'Abogado no encontrado' });

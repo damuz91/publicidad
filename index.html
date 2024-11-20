@@ -261,7 +261,21 @@
       alert("Debes seleccionar por lo menos una opción en el paso 4");
       return;
     }
-    concatenar();
+
+    
+ fetch('http://localhost:3000/crear_legal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(  concatenar())
+      }).then(function(response){
+        return response.json()
+      }).then(function(data){
+        console.log("El servidor me devolvió una respuesta exitosa con los datos,", data)
+      }).catch(function(error){
+        console.log("Hubo un error", error)
+      })
   }
  
   function concatenar(){
@@ -299,30 +313,17 @@
     alert(textoFinal);
     alert(textoPieza)
   
-
-  function enviarSolicitud() {
       const cuerpo_solicitud = {
         texto_creado: textoFinal, 
         marca: marca,
         nombre_usuario: nombre_usuario,
         evento: tipoEvento,
-      }
+      } 
+      
+      return cuerpo_solicitud
     }  
-  }
+  
 
- fetch('http://localhost:3000/crear_legal', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cuerpo_solicitud)
-      }).then(function(response){
-        return response.json()
-      }).then(function(data){
-        console.log("El servidor me devolvió una respuesta exitosa con los datos,", data)
-      }).catch(function(error){
-        console.log("Hubo un error", error)
-      })
     
   function mostrarCampoEvento() {
     const tipoEvento = document.getElementById("tipoEvento").value;
