@@ -64,7 +64,7 @@
         <br>
         <div id="campoEvento" style="display: none;">
             <label for="nombreEvento">Nombre del evento:</label>
-            <input  class="form-control" style="width: 200px; height: 40px;" type="text" id="nombreEvento">
+            <input  class="form-control" style="width: 300px; height: 40px;" type="text" id="nombreEvento" placeholder="Nombre del banco o franquicia">
         </div>
         <hr>
         <!-- Paso 3 -->
@@ -91,8 +91,9 @@
               Desde y Hasta
             </label>
             <label for="">
-              <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="extra">
+              <input abbr title="Selecciona esta opción si el descuento EXTRA aplica luego del descuento inicial" type="radio" name="modo2" onclick="procesar_segundo_paso()" value="extra">
               Descuento extra
+              window.alert("Aplica luego de dcto inicial");
             </label>
             <label for="">
               <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="unico">
@@ -284,8 +285,7 @@
     let modo2 = valor_paso2 == "desde y hasta" ?
       " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%" + " de descuento.":
       valor_paso2 == "unico" ? " con descuento del " + document.getElementById('descuento').value + "%" + "":
-      valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%" : "";
-     
+      valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%." + "El descuento EXTRA es otorgado después de aplicado el descuento inicial.": "";
     let fecha_desde = document.getElementById('desde').value;
     let fecha_hasta = document.getElementById('hasta').value;
     let [anioDesde, mesDesde, diaDesde] = fecha_desde.split('-');
@@ -304,9 +304,9 @@
     }
     
     let Texto_complemento = " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.";
-    let textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " Desde el " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + referenciasSeleccionadas + idreferecias + " " + comoaplicadcto() + Texto_complemento;
+    let textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + ". Desde el " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + referenciasSeleccionadas + idreferecias + " " + comoaplicadcto() + Texto_complemento;
     if (tipoEvento !== "" && tipoEvento !== "No") {
-      textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " Desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + referenciasSeleccionadas + idreferecias + " " + comoaplicadcto() + Texto_complemento;
+      textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " Desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + referenciasSeleccionadas + idreferecias + comoaplicadcto() + Texto_complemento;
     }
     let textoPieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + referenciasSeleccionadas + " " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Si la imagen de fondo es de muestra, recuerda agregar -Imagen de ref.-" 
     
