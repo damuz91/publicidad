@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+ 
   <title>LegalAds</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+ 
 <header>
   <br>
     <div class="back" style="text-align: center;">
@@ -43,13 +43,15 @@
             <option value="Gs">Gstar</option>
             <option value="Kl">Kliikler</option>
             <option value="MNG">Mango</option>
+            <option value="MNGOU">Mango Outlet</option>
             <option value="Naf">Naf Naf</option>
+            <option value="NafOU">Naf Naf Outlet</option>
             <option value="Ou">Outlet</option>
             <option value="Vt">Vivant</option>
             <option value="Su">Su+</option>
         </select>
         <br>
-
+ 
         <label for="nombre_usuario">Ingresa tu nombre:</label>
         <input type="text" name="nombre_usuario" placeholder="Ejemplo: Pedro Gómez" class="form-control" style="width: 200px; height: 40px;" required>
         <br>
@@ -93,7 +95,6 @@
             <label for="">
               <input abbr title="Selecciona esta opción si el descuento EXTRA aplica luego del descuento inicial" type="radio" name="modo2" onclick="procesar_segundo_paso()" value="extra">
               Descuento extra
-              window.alert("Aplica luego de dcto inicial");
             </label>
             <label for="">
               <input type="radio" name="modo2" onclick="procesar_segundo_paso()" value="unico">
@@ -117,7 +118,7 @@
             <label for="descuento">Descuento</label>
             <input style="width: 200px; height: 40px;"  placeholder="Solo el # (sin %)" id="descuento" type="number" class="form-control">
           </div>
-
+ 
           <div id="caja_rango" class="d-none">
             <div class="form-group">
               <label for="porcentaje_desde">
@@ -132,7 +133,7 @@
               </label>
             </div>
           </div>
-
+ 
           <div id="caja_referencias_seleccionadas" class="d-none">
             <div class="form-group">
               <label for="">
@@ -158,7 +159,7 @@
             </ul>
           </div>
         </div>
-         <br> 
+         <br>
         <!-- Paso 7 -->
         <div id="paso5" class="d-none">
           <h2>Paso 7. Conoce aquí tus legales</h2>
@@ -167,15 +168,15 @@
           </div>
         </div>
       </form>
-    </div> 
+    </div>
   </div>
 </div>
-
-
+ 
+ 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+ 
+ 
 <script>
   let valor_paso1;
   let valor_paso2;
@@ -262,8 +263,8 @@
       alert("Debes seleccionar por lo menos una opción en el paso 4");
       return;
     }
-
-    
+ 
+   
  fetch('http://localhost:3000/crear_legal', {
         method: 'POST',
         headers: {
@@ -302,29 +303,29 @@
     if (valor_paso1 == "toda" && valor_paso2 == "desde y hasta") {
       referenciasSeleccionadas = " Las referencias se encuentran identificadas con " + document.getElementById('textoreferencias').value.trim() + ".";
     }
-    
+   
     let Texto_complemento = " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.";
     let textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + ". Desde el " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta  + " en " + valores_paso4.join(", ") + "." + referenciasSeleccionadas + idreferecias + " " + comoaplicadcto() + Texto_complemento;
     if (tipoEvento !== "" && tipoEvento !== "No") {
       textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " Desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + referenciasSeleccionadas + idreferecias + comoaplicadcto() + Texto_complemento;
     }
-    let textoPieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + referenciasSeleccionadas + " " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Si la imagen de fondo es de muestra, recuerda agregar -Imagen de ref.-" 
-    
+    let textoPieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + referenciasSeleccionadas + " " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Si la imagen de fondo es de muestra, recuerda agregar -Imagen de ref.-"
+   
     alert(textoFinal);
     alert(textoPieza)
-  
+ 
       const cuerpo_solicitud = {
-        texto_creado: textoFinal, 
+        texto_creado: textoFinal,
         marca: marca,
         nombre_usuario: nombre_usuario,
         evento: tipoEvento,
-      } 
-      
+      }
+     
       return cuerpo_solicitud
     }  
-  
-
-    
+ 
+ 
+   
   function mostrarCampoEvento() {
     const tipoEvento = document.getElementById("tipoEvento").value;
     const campoEvento = document.getElementById("campoEvento");
@@ -334,9 +335,9 @@
       campoEvento.style.display = "none";
     }
   }
-  
+ 
  </script>
-
+ 
 <br><br><br>
 <nav>
   <h5>Información de interés</h5>
@@ -344,7 +345,7 @@
   <br>
   <a target="_blank" href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=44306">Ley 1480 de 2011 - Estatuto del consumidor</a>
 </nav>
-
+ 
 <section>
   <footer class="text-center">
     <br>
