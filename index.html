@@ -138,7 +138,7 @@
             <div class="form-group">
               <label for="">
                 Referencias Seleccionadas
-                <textarea placeholder="Se identifican con (identifica las referencias) " class="form-control" name="textoreferencias" id="textoreferencias" cols="50" rows="5"></textarea>
+                <textarea placeholder= "Termina la frase 'Las referencias seleccionadas _______(tu respuesta iría aquí)_____' " class="form-control" name="textoreferencias" id="textoreferencias" cols="50" rows="5"></textarea>
               </label>
             </div>
           </div>
@@ -296,12 +296,12 @@
     let fechaFormateadaHasta = `${parseInt(diaHasta)} de ${meses[parseInt(mesHasta) - 1]} de ${anioHasta}`;
      
     if (valor_paso1 == "referencias")  
-    idreferecias = " Las referencias seleccionadas se identifican con " + document.getElementById("textoreferencias").value + "." ;
+    idreferecias = " Las referencias seleccionadas " + document.getElementById("textoreferencias").value + "." ;
     else
     idreferecias = ""
     let referenciasSeleccionadas = "";
     if (valor_paso1 == "toda" && valor_paso2 == "desde y hasta") {
-      referenciasSeleccionadas = " Las referencias se encuentran identificadas con " + document.getElementById('textoreferencias').value.trim() + ".";
+      referenciasSeleccionadas = " Las referencias seleccionadas " + document.getElementById('textoreferencias').value.trim() + ".";
     }
    
     let Texto_complemento = " No acumulable con otras promociones o descuentos vigentes. En caso de cambio o garantía, se reconocerá el valor pagado por la(s) prenda(s). No aplica para compra de bono regalo. Promoción no redimible en dinero.";
@@ -358,5 +358,4 @@
 </body>
 </html>
  
-  
-  
+ 
