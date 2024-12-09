@@ -18,6 +18,7 @@ head {
     position:static;
     width: 100%;
     z-index: 100;
+   
 }
 
 .btn {
@@ -36,4 +37,58 @@ nav {
     border: 2px solid rgba(5, 5, 5, 0.603);
     text-decoration: none;
     background: rgba(178, 194, 228, 0.452);
+}
+
+/* Estilo para el popup */
+dialog {
+    width: 60%;
+    max-width: 500px;
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    animation: fadeIn 0.3s ease-in-out;
+    text-align:justify;
+    z-index: 1000;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Botón de cerrar en el popup */
+dialog button#btnCerrarModal {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d9534f;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+dialog button#btnCerrarModal:hover {
+    background-color: #c9302c;
+}
+
+/* Animación de entrada del popup */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fondo oscuro cuando el popup está activo */
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
 }

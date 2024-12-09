@@ -165,6 +165,10 @@
           <h2>Paso 7. Conoce aquí tus legales</h2>
           <div class="form-group">
             <button style="color: #000000;" type="button" class="btn btn-success" onclick="generar()">Click aquí </button>
+            <dialog id="miPopUp">
+              <p id="contenidoPopUp"></p>
+              <button id="btnCerrarModal">Cerrar</button>
+            </dialog>
           </div>
         </div>
       </form>
@@ -242,6 +246,12 @@
     return Texto_comoaplica;
   }
  
+const miPopUp = document.getElementById('miPopUp');
+const contenidoPopUp = document.getElementById('contenidoPopUp');
+const btnCerrarModal = document.getElementById('btnCerrarModal');
+btnCerrarModal.addEventListener('click', () => { miPopUp.close();
+});
+
   function generar(){
     e = document.getElementById("marca");
     marca = e.options[e.selectedIndex].text;
@@ -284,9 +294,9 @@
     let texto_final = "";
     let modo1 = valor_paso1 == "toda" ? "Toda la tienda" : "Referencias seleccionadas";
     let modo2 = valor_paso2 == "desde y hasta" ?
-      " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%" + " de descuento.":
+      " desde " + document.getElementById('porcentaje_desde').value + "% hasta " + document.getElementById('porcentaje_hasta').value + "%" + " de descuento":
       valor_paso2 == "unico" ? " con descuento del " + document.getElementById('descuento').value + "%" + "":
-      valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%." + "El descuento EXTRA es otorgado después de aplicado el descuento inicial.": "";
+      valor_paso2 == "extra" ? " con descuento extra del " + document.getElementById('descuento').value + "%." + " El descuento EXTRA es otorgado después de aplicado el descuento inicial": "";
     let fecha_desde = document.getElementById('desde').value;
     let fecha_hasta = document.getElementById('hasta').value;
     let [anioDesde, mesDesde, diaDesde] = fecha_desde.split('-');
@@ -309,10 +319,13 @@
     if (tipoEvento !== "" && tipoEvento !== "No") {
       textoFinal = "Tus legales para esta promoción son los siguientes:" + "\n\n" + marca + " " + modo1 + modo2 + " pagando la totalidad de la compra con tarjetas débito o crédito " + tipoEvento + " en " + valores_paso4.join(", ") + "." + " Desde el " +  fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + referenciasSeleccionadas + idreferecias + comoaplicadcto() + Texto_complemento;
     }
-    let textoPieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + modo1 + modo2 + idreferecias + referenciasSeleccionadas + " " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + " " + "aplica en" + " " + valores_paso4.join(", ") + "\n\n" + "Si la imagen de fondo es de muestra, recuerda agregar -Imagen de ref.-"
+    let textoPieza = "Tu pieza gráfica debe llevar como mínimo la siguiente información:" + "\n\n" + "1) " + modo1 + modo2 + "\n" + "2) Aplica en" + " " + valores_paso4.join(", ") + "\n" + "3) Desde el " + fechaFormateadaDesde + " hasta el " + fechaFormateadaHasta + "\n" + "4) Si la imagen de fondo es una muestra, recuerda agregar -Imagen de ref.-"
    
-    alert(textoFinal);
-    alert(textoPieza)
+    //alert(textoFinal);
+    //alert(textoPieza)
+
+    contenidoPopUp.innerText = textoFinal+ "\n\n\n" + textoPieza;  
+    miPopUp.showModal();
  
       const cuerpo_solicitud = {
         texto_creado: textoFinal,
